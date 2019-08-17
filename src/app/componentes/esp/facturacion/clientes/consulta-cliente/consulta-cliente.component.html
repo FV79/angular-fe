@@ -1,0 +1,37 @@
+<div class="container paddingBoto50">
+
+    <dx-data-grid #grid id="gridContainer" [dataSource]="httpClient" keyExpr="cli_codcliente" [hoverStateEnabled]="true" [showBorders]="true" [selectedRowKeys]="[]">
+
+        <!-- <dxo-filter-row [visible]="showFilterRow" [applyFilter]="currentFilter"></dxo-filter-row> -->
+        <!-- <dxo-header-filter [visible]="showHeaderFilter"></dxo-header-filter> -->
+        <dxo-search-panel [visible]="true" [width]="240" placeholder="Buscar..."></dxo-search-panel>
+
+        <dxo-selection mode="single"></dxo-selection>
+        <dxi-column dataField="cli_nombre" caption="Nombre"></dxi-column>
+        <dxi-column dataField="cli_apell_paterno" caption="Apell Paterno"></dxi-column>
+        <dxi-column dataField="cli_apell_materno" caption="Apell Materno"></dxi-column>
+        <dxi-column dataField="cli_rfc" caption="RFC"></dxi-column>
+        <dxi-column dataField="cli_cp" caption="Codigo Postal"></dxi-column>
+        <dxi-column dataField="cli_direccion" caption="Direccion"></dxi-column>
+    </dx-data-grid>
+
+
+    <div id="clientesInformacion" *ngIf="grid.selectedRowKeys.length">
+        <ul class="listClientes">
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_nombre}}</li>
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_apell_paterno}}</li>
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_apell_materno}}</li>
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_rfc}}</li>
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_cp}}</li>
+            <li class="itemList">{{grid.instance.getSelectedRowsData()[0].cli_direccion}}</li>
+            <li class="itemList">( {{grid.instance.getSelectedRowsData()[0].cli_numInt}} )</li>
+            <li class="itemList">[ {{grid.instance.getSelectedRowsData()[0].cli_numExt}} ]</li>
+            <li class="itemList"> {{grid.instance.getSelectedRowsData()[0].cli_estado}} </li>
+            <li class="itemList"> {{grid.instance.getSelectedRowsData()[0].cli_ciudad}} </li>
+            <li class="itemList"> {{grid.instance.getSelectedRowsData()[0].cli_pais}} </li>
+            <li class="itemList"> {{grid.instance.getSelectedRowsData()[0].cli_telefono}} </li>
+            <li class="itemList"> {{grid.instance.getSelectedRowsData()[0].cli_email}} </li>
+        </ul>
+    </div>
+
+</div>

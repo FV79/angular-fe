@@ -1,0 +1,84 @@
+<app-menu></app-menu>
+
+<div class="fondoB paddingBoto100">
+    <div class="container">
+        <h1 class="tituloDentro">Registro</h1>
+        <form (ngSubmit)="registro()">
+            <div [formGroup]="grupoRegistro">
+                <div class="row">
+                    <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6" [formGroup]="grupoRegistro">
+                        <label for="cli_ciudad " class="labelCliente">Correo electronico <span class="campoRequerido" *ngIf="grupoRegistro.controls['emp_email'].errors?.required">*</span></label>
+                        <input formControlName="emp_email" [(ngModel)]="empresaRegistro.emp_email" name="emp_email" type="email" placeholder="Ingresa tu correo electronico" class="inputCliente">
+
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_email'].errors?.pattern">
+                            Formato invalido
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6" [formGroup]="grupoRegistro">
+                        <label for="cli_ciudad " class="labelCliente">Numero telefonico <span class="campoRequerido" *ngIf="grupoRegistro.controls['emp_telefono'].errors?.required">*</span></label>
+                        <input (keypress)="solonumeros($event)" formControlName="emp_telefono" [(ngModel)]="empresaRegistro.emp_telefono" name="emp_telefono" type="text" placeholder="Ingresa tu numero de telefono" class="inputCliente">
+
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_telefono'].errors?.maxlength ">
+                            Solo tiene que tener 10 caracteres
+                        </div>
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_telefono'].errors?.minlength">
+                            Solo tiene que tener 10 caracteres
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12" [formGroup]="grupoRegistro">
+                        <label for="cli_ciudad " class="labelCliente">Nombre de empresa <span class="campoRequerido" *ngIf="grupoRegistro.controls['emp_nomempresa'].errors?.required">*</span></label>
+                        <input formControlName="emp_nomempresa" [(ngModel)]="empresaRegistro.emp_nomempresa" name="emp_nomempresa" type="text" placeholder="Ingresa la razón social" class="inputCliente">
+                    </div>
+                    <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_nomempresa'].errors?.minlength">
+                        Debe de tener al menos 5 letras
+                    </div>
+                    <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_nomempresa'].errors?.maxlength">
+                        Debe de tener menos 60 letras
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6" [formGroup]="grupoRegistro">
+                        <label for="cli_ciudad " class="labelCliente">Contraseña <span class="campoRequerido" *ngIf="grupoRegistro.controls['emp_contrasena_login'].errors?.required">*</span></label>
+                        <input formControlName="emp_contrasena_login" [(ngModel)]="empresaRegistro.emp_contrasena_login" name="emp_contrasena_login" type="password" placeholder="Ingresa una contraseña" class="inputCliente">
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_contrasena_login'].errors?.minlength">
+                            Debe de tener al menos 5 letras
+                        </div>
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_contrasena_login'].errors?.maxlength">
+                            Debe de tener menos 60 letras
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6">
+                        <label for="cli_ciudad " class="labelCliente">confirmar contraseña <span class="campoRequerido" *ngIf="grupoRegistro.controls['emp_contraseñados'].errors?.required">*</span></label>
+                        <input formControlName="emp_contraseñados" type="password" placeholder="Confirma la contraseña" class="inputCliente">
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_contraseñados'].errors?.minlength">
+                            Debe de tener al menos 5 letras
+                        </div>
+                        <div class="campoValidacion" *ngIf="grupoRegistro.controls['emp_contraseñados'].errors?.maxlength">
+                            Debe de tener menos 60 letras
+                        </div>
+                    </div>
+                </div>
+
+                {{grupoRegistro.valid}}
+            </div>
+            <div>
+                <button class="centrado btnRegistro" type="submit">Registrar</button>
+            </div>
+            <div>
+                <p class="registroTerminos">
+                    Al hacer clic en "Registrar" aceptará los <a [routerLink]="['/xmazAvisoPrivacidad']" target="_blank">Terminos y Condiciones del servicio y la Política de privacidad de Datos © 2019.</a>
+                </p>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

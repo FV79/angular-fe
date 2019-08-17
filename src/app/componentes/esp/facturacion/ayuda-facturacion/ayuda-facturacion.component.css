@@ -1,0 +1,14 @@
+.ayudaIconPdf {
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    font-size: 5rem;
+    padding-bottom: 10px;
+}
+
+.ayudaIconTitulo {
+    text-align: center;
+    font-weight: 500;
+    color: #2274a2;
+    cursor: pointer;
+}

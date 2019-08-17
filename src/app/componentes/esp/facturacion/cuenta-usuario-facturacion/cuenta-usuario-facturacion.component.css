@@ -1,0 +1,22 @@
+.cuentaIconContacto {
+    display: block;
+    padding-bottom: 5px;
+    font-size: 5rem;
+    text-align: center;
+    padding-top: 5px;
+    color: #2274a2;
+}
+
+.cuentaTituloContacto {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.cuentaAccionContacto {
+    color: #2274a2;
+    text-align: center;
+    font-size: 1.5rem;
+    text-decoration: none;
+    cursor: pointer;
+}

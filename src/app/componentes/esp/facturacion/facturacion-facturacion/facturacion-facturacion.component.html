@@ -1,0 +1,491 @@
+<div class="fondoB">
+    <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+    <h1 class="tituloDentro">Facturación</h1>
+    <div class="pLados">
+        <form>
+
+            <!-- Cliente y factura -->
+            <div>
+                <div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <button type="button" (click)="hacerFactura()" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-file-text"></i></span>Facturar
+                                </button>
+                                <button type="button" (click)="limpiarCliente()" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-eraser"></i></span>Limpiar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8 facturacionBorder faPaTOBO20">
+                        <h3 class="tituloFacturacion">Datos Clientes</h3>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div>
+                                    <label for="" class="labelCliente">RFC</label>
+                                    <input [ngModel]="facturaDDL.fac_cliente_RFC | uppercase" name="fac_cliente_RFC" (ngModelChange)="facturaDDL.fac_cliente_RFC=$event" type="text" class="inputCliente" placeholder="Ingrese el RFC">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn-buscar" data-toggle="modal" data-target="#buscarCliente"><i class="fa fa-search" aria-hidden="true"></i></button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-lg-5 col-xl-5 col-sm-5">
+                                <label for="" class="labelCliente">Nombre</label>
+                                <input [readonly]="true" [(ngModel)]="facturaDDL.fac_cliente_nombre" name="fac_cliente_nombre" type="text" class="inputCliente" placeholder="Nombre del cliente">
+                            </div>
+                            <div class="col-md-5 col-lg-5 col-xl-5 col-sm-5">
+                                <label for="" class="labelCliente">Domicilio</label>
+                                <input [readonly]="true" [(ngModel)]="facturaDDL.fac_cliente_domicilio" name="fac_cliente_domicilio" type="text" class="inputCliente" placeholder="Domicilio del cliente">
+                            </div>
+                            <div class="col-md-2 col-lg-2 col-xl-2 col-sm-2">
+                                <label for="" class="labelCliente">Codigo Postal</label>
+                                <input [readonly]="true" [(ngModel)]="facturaDDL.fac_cli_cp" name="fac_cli_cp" type="text" class="inputCliente" placeholder="Codigo postal">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 faPaTOBO20 facturacionBorder">
+                        <h3 class="tituloFacturacion">Datos Factura</h3>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <label for="" class="labelCliente">Fecha</label>
+                                <input [readonly]="true" [(ngModel)]="facturaDDL.fac_factura_fecha" name="fac_factura_fecha" type="text" class="inputCliente">
+                            </div>
+
+                            <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6">
+                                <label for="inputState" class="labelCliente ">Tipo de documento</label>
+                                <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_factura_tipodoc" name="fac_factura_tipodoc">
+                                    <option value="">Seleccione un documento</option>
+                                    <option  *ngFor="let documento of TipoDocumentos" value="{{documento.codigo}}"> {{documento.tipo}} </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div>
+                            <label for="inputState" class="labelCliente ">USO CFDI</label>
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_cliente_usoCDFI_codigo" name="fac_cliente_usoCDFI_codigo">
+                                <option value="">Seleccione uso CFDI</option>
+                                <option *ngFor="let usocfdi of usoCFDI" value="{{usocfdi.cfdi_codigo}}"> {{usocfdi.cfdi_nombre}} </option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Parte de productos e impuestos -->
+            <div class="row">
+
+                <div class="col-md-10 facturacionBorder faPaTOBO20">
+                    <h3 class="tituloFacturacion">Datos Prodcutos</h3>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="">Clave</label>
+                                    <input [(ngModel)]="facturaDDL.fac_pro_idprodcto_interna" name="fac_pro_idprodcto_interna" type="text" class="inputCliente" placeholder="Clave del producto">
+                                </div>
+                                <div class="col-md-2">
+                                    <button class="btn-buscar" data-toggle="modal" data-target="#buscarArticulo"><i class="fa fa-search" aria-hidden="true"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <label class="labelCliente">Nombre del producto</label>
+                            <input [readonly]="true" [(ngModel)]="facturaDDL.fac_pro_nombre" name="fac_pro_nombre" type="text" class="inputCliente" placeholder="Nombre del producto">
+                        </div>
+                        <div class="col-md-5">
+                            <label for="" class="labelCliente">Unidad de medida</label>
+                            <input [readonly]="true" [(ngModel)]="facturaDDL.fac_pro_unidadmedida_nombre_sat" name="fac_pro_unidadmedida_nombre_sat" type="text" class="inputCliente" placeholder="Unidad de medida del producto">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 ">
+                            <label class="labelCliente">Precio</label>
+                            <input [ngModel]="facturaDDL.fac_pro_precio" name="fac_pro_precio_siva" type="number" class="inputCliente" placeholder="Precio del producto">
+                        </div>
+                        <div class="col-md-3">
+                            <label class="labelCliente">Descuento</label>
+                            <input [(ngModel)]="facturaDDL.fac_pro_descuento_siva" name="fac_pro_descuento_siva" type="number" class="inputCliente" placeholder="Descuento del producto">
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">Cantidad</label>
+                            <input [(ngModel)]="facturaDDL.fac_pro_cantidad" name="fac_pro_cantidad" type="number" class="inputCliente" placeholder="Cantidad de producto">
+                        </div>
+                        <div class="col-md-1 noPaddingExt">
+                            <button type="button" (click)="agregarProducto()" class="btnFacturacion btn-labeledFac btn-azul">
+                                <span class="btn-labelFacturacion"></span>Agregar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2 facturacionBorder faPaTOBO20">
+                    <h3 class="tituloFacturacion">Impuestos producto</h3>
+                    <div>
+                        <ul style="list-style: none">
+                            <li class="facturacionImpuestoList" *ngIf="productoImpuestos.pro_iva == 1">IVA</li>
+                            <!-- <li class="facturacionImpuestoList" *ngIf="productoImpuestos.pro_isr == 1">ISR</li>
+                            <li class="facturacionImpuestoList" *ngIf="productoImpuestos.pro_ish != 0">ISH: {{productoImpuestos.pro_ish}} </li> -->
+                        </ul>
+                    </div>
+                    <hr>
+                    <!--Checks de impuestos-->
+                    <div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                              <input [readonly]="true" type="checkbox" class="form-check-input"  [(ngModel)]="facturaDDL.ivaProductoCheck" name="ivaProductoCheck">IVA
+                            </label>
+                        </div>
+                        <!-- <div class="form-check">
+                            <label class="form-check-label">
+                              <input type="checkbox" class="form-check-input" [(ngModel)]="facturaDDL.isrProductoCheck" name="isrProductoCheck">ISR
+                            </label>
+                        </div> -->
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- tabla de productos -->
+            <div class="row">
+                <div class="facturacionBorder col-md-12 col-xl-12 col-lg-12 col-sm-12 faPaTOBO20">
+                    <div class="table-responsive" style="height:300px;overflow-y: scroll;">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th class="thProducto">Nombre del producto</th>
+                                    <th class="thProducto">Medida de unidad</th>
+                                    <th class="thProducto">Precio del producto</th>
+                                    <th class="thProducto">Descuento del producto</th>
+                                    <th class="thProducto">Cantidad</th>
+                                    <th class="thProducto">Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let producto of productoAgregado;let index = index">
+                                    <td class="tdProducto">{{producto.fac_pro_nombre}}</td>
+                                    <td class="tdProducto">{{producto.fac_pro_unidadmedida_codigo_sat}}</td>
+                                    <td class="tdProducto">{{producto.fac_pro_precio}}</td>
+                                    <td class="tdProducto">{{facturaDDL.fac_pro_descuento}}</td>
+                                    <td class="tdProducto">{{producto.fac_pro_cantidad}}</td>
+                                    <td class="tdButton"><button type="button" (click)="eliminarProducto(index)" class="btnFacturacion btn-labeledFac btn-azul"><span class="btn-labelFacturacion"><i class="fa fa-minus"></i></span>Quitar</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Detalle de pago, Obeservaciones, score -->
+            <div class="row facturacionBorder">
+                <div class="col-md-4 facturacionBorder faPaTOBO20">
+                    <h3 class="tituloFacturacion">Detalles Pago</h3>
+                    <div class="row">
+                        <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                            <label class="labelCliente">Forma de pago</label>
+                            <!-- <input [(ngModel)]="factura.forma_pago" name="forma_pago" type="number" class="inputCliente" placeholder="Ingrese el RFC"> -->
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_formapago_codigo" name="fac_pago_formapago_codigo">
+                                <option value="">Seleccione Forma de pago</option>
+                                <option *ngFor="let formapago of formaPago" value="{{formapago.fpago_codigo}}"> {{formapago.fpago_nombre}} </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                            <label for="" class="labelCliente">Metodo de pago</label>
+                            <!-- <input [(ngModel)]="factura.metodo_pago" name="metodo_pago" type="number" class="inputCliente" placeholder="Ingrese el RFC"> -->
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_metodopago" name="fac_pago_metodopago">
+                                <option value="">Seleccione Metodo</option>
+                                <option *ngFor="let metodopago of MetodoPago" value="{{metodopago.metodoPagoCodigo}}"> {{metodopago.metodoPagoNombre}} </option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6">
+                            <label for="inputState " class="labelCliente ">Tipo de moneda</label>
+                            <select id="inputMoneda" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_tipomoneda" name="fac_pago_tipomoneda">
+                                <option value="">Seleccione el tipo de moneda</option>
+                                <option *ngFor="let moneda of TipoModena" value="{{moneda.codigo}}" > {{moneda.tipo}} </option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="" class="labelCliente">Valor dolar</label>
+                            <input (ngModelChange)="this.calcularPagos(1,$event)" [disabled]="facturaDDL.fac_pago_tipomoneda == 0 ?true :false" [(ngModel)]="facturaDDL.fac_pago_valordolar" name="fac_pago_valordolar" type="number" class="inputCliente" placeholder="Valor del dollar">
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Seccion de observaciones de factura -->
+                <div class="col-md-4 facturacionBorder faPaTOBO20">
+                    <h3 class="tituloFacturacion">Observaciones factura</h3>
+                    <div>
+                        <label for="" class="labelCliente">Observaciones</label>
+                        <!-- <input [(ngModel)]="factura.observaciones" name="observaciones" class="w-100" type="text" placeholder="Obsercaciones de la factura"> -->
+                        <textarea [(ngModel)]="facturaDDL.observaciones" name="observaciones" cols="5" rows="10" placeholder="Obsercaciones de la factura" style="width: 100%; height: auto;"></textarea>
+                    </div>
+                </div>
+
+                <!-- Seccion de Totales, parte de operacionales -->
+                <div class="col-md-4 facturacionBorder faPaTOBO20">
+                    <h3 class="tituloFacturacion">Pagos de factura</h3>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">Subtotal</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [ngModel]="facturaDDL.fac_oper_subtotal | number : '1.2-2'" (ngModelChange)="facturaDDL.fac_oper_subtotal=$event" name="fac_oper_subtotal" type="number" class="inputCliente" placeholder="Subtotal de la factura">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">Descuento</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [ngModel]="facturaDDL.fac_oper_descuento | number : '1.2-2'" (ngModelChange)="facturaDDL.fac_oper_descuento=$event" name="fac_oper_descuento" type="number" class="inputCliente" placeholder="Descuento total">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">IVA</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [ngModel]="facturaDDL.fac_oper_iva_total | number : '1.2-2'" (ngModelChange)="facturaDDL.fac_oper_iva_total=$event" name="fac_oper_iva_total" type="number" class="inputCliente" placeholder="I.V.A total">
+                        </div>
+                    </div>
+                    <!-- <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">ISR</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [(ngModel)]="facturaDDL.fac_oper_isr_total" name="fac_oper_isr_total" type="number" class="inputCliente" placeholder="I-S-R total">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">ISH</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [(ngModel)]="facturaDDL.fac_oper_ish_total" name="fac_oper_ish_total" type="number" class="inputCliente" placeholder="I.S.H total">
+                        </div>
+                    </div> -->
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="" class="labelCliente">Total</label>
+                        </div>
+                        <div class="col-md-8">
+                            <input [readonly]="true" [ngModel]="facturaDDL.fac_oper_total | number : '1.2-2'" (ngModelChange)="facturaDDL.fac_oper_total=$event" name="fac_oper_total" type="number" class="inputCliente" placeholder="Total de la factura">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seccion nota de credito -->
+            <!-- *ngIf="facturaDDL.fac_factura_tipodoc == 1 $('#notaCredito').hidden" -->
+            <div class="row facturacionBorder faPaTOBO20" id="notaCredito" *ngIf="facturaDDL.fac_factura_tipodoc == 1">
+                <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                    <h3 class="tituloFacturacion">Datos Nota de credito</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="" class="labelCliente">Folio relacionado</label>
+                            <input type="number" [(ngModel)]="facturaDDL.fac_nocre_foliorel" name="fac_nocre_foliorel" class="inputCliente" placeholder="Cantidad de producto">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="labelCliente">Tipo relacion</label>
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_nocre_tiporelacion_codigo" name="fac_nocre_tiporelacion_codigo">
+                                <option value="">Seleccione un documento</option>
+                                <option *ngFor="let tiporelacion of tipoRelacion" value="{{tiporelacion.trelacion_codigo}}"> {{tiporelacion.trelacion_nombre}} </option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </form>
+    </div>
+
+
+    <!-- Modales Cliente -->
+    <div class="modal fade" id="buscarCliente" tabindex="-1" role="dialog" aria-labelledby="buscarCliente" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-titulo-gral" id="buscarCliente">Clientes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <app-loading *ngIf="loading"></app-loading>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>RFC</th>
+                                    <th>CP</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr (click)="TraerClienteClick(index)" onclick="$('#buscarCliente').modal('hide')" *ngFor="let cliente of cliente ;let index = index">
+                                    <td>{{cliente.cli_nombre}}</td>
+                                    <td>{{cliente.cli_rfc}}</td>
+                                    <td>{{cliente.cli_cp}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal articulo -->
+    <div class="modal fade" id="buscarArticulo" tabindex="-1" role="dialog" aria-labelledby="buscarCliente" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-titulo-gral" id="buscarCliente">Productos</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <app-loading *ngIf="loading"></app-loading>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Precio</th>
+                                    <th>Medida</th>
+                                    <th>Descuento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr (click)="traerArticuloClick(index)" onclick="$('#buscarArticulo').modal('hide')" *ngFor="let producto of producto;let index = index">
+                                    <td *ngIf="producto.pro_status == 1">{{producto.pro_nombre}}</td>
+                                    <td *ngIf="producto.pro_status == 1">{{producto.pro_precio}}</td>
+                                    <td *ngIf="producto.pro_status == 1">{{producto.pro_unidad_medida}}</td>
+                                    <td *ngIf="producto.pro_status == 1">{{producto.pro_descuento}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal despues de facturar -->
+
+    <div class="modal fade" id="modalFacturaD" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-titulo-gral" id="exampleModalCenterTitle">Xmaz Facturación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+                </div>
+                <div class="modal-body">
+                    <dx-tab-panel #tabPanel [dataSource]="pestanaFactura" [selectedIndex]="0" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+                        <div *dxTemplate="let pestana of 'title'">
+                            <span>{{pestana.nombrePestanaFac}}</span>
+                        </div>
+                        <div *dxTemplate="let pestana of 'item'">
+                            <div style="height:auto;" class="pLados;">
+
+                                <div *ngIf="pestana.nombrePestanaFac == 'Enviar factura'">
+                                    <span class="spanModalFactura">Enviar factura</span>
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                                                <label class="labelCliente">Para:</label>
+                                                <input [(ngModel)]="correoFactura.correo" name=correo class="inputCliente" type="text">
+                                            </div>
+                                            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                                                <label class="labelCliente">Asunto:</label>
+                                                <input [(ngModel)]="correoFactura.cc" name="cc" class="inputCliente" type="text">
+                                            </div>
+                                            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                                                <button (click)="agregarCorreoFactura()" class="btn btn-primary">Agregar Destinatario</button>
+                                            </div>
+                                            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                                                <div class="table-responsive">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Correo</th>
+                                                                <th>Borrar</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr *ngFor="let correo of correosFactura">
+                                                                <td>{{correo.correo}}</td>
+                                                                <td><button (click)="eliminarCorreoFactura(correo)" class="btn btn-danger">Borrar</button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
+                                                <div class="centrado tcenter">
+                                                    <button (click)="funcionEnviarPDF()" class="btn-fac-acc"><i class="fa fa-paper-plane fa-3x" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <div *ngIf="pestana.nombrePestanaFac == 'Descargar factura'">
+                                    <span class="spanModalFactura">Descargar Factura</span>
+                                    <div class="centrado tcenter">
+                                        <button (click)="funcionDescargarPDF()" class="btn-fac-acc"><i class="fa fa-download fa-3x" aria-hidden="true"></i></button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dx-tab-panel>
+                    <div class="item-box">
+                        Factura Opción <span>{{tabPanel.selectedIndex + 1}}</span> de <span>{{pestanaFactura.length}}</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- div Principal -->
+</div>

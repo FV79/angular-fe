@@ -1,0 +1,207 @@
+<!-- <form action="" (ngSubmit)="agregarCliente()" #forma="ngForm"> -->
+<form action="" #forma="ngForm">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-12">
+                <label for="cli_nombre" class="labelCliente">Nombre(s)</label>
+                <input [(ngModel)]="cliente.cli_nombre" name="cliente.cli_nombre" type="text" placeholder=" Ingresa el nombre(s) del cliente" class="inputCliente" maxlength="50" required>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                <label for="cli_apell_paterno " class="labelCliente">Apellido paterno</label>
+                <input type="text" [(ngModel)]="cliente.cli_apell_paterno" name="cli_apell_paterno" placeholder="Ingresa el apellido Paterno  " class="inputCliente" maxlength="50">
+            </div>
+            <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                <label for="cli_apell_materno " class="labelCliente ">Apellido Materno</label>
+                <input type="text" [(ngModel)]="cliente.cli_apell_materno" name="cli_apell_materno " placeholder="Ingresa el apellido Materno " class="inputCliente" maxlength="50">
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                <label for="inputState " class="labelCliente ">País</label>
+                <select id="inputState " class="form-control " class="inputCliente" [(ngModel)]="cliente.cli_pais" name="pais" required>
+                    <option value="">Seleccione un pais</option>
+                    <option *ngFor="let pais of listaPais" [value]="pais">{{pais}}</option>
+                </select>
+            </div>
+
+            <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                <label for="cli_estado" class="labelCliente">Estado</label>
+                <input type="text " [(ngModel)]="cliente.cli_estado" name="cli_cli_estado " placeholder="Ingresa el estado  " class="inputCliente " required maxlength="35">
+            </div>
+
+            <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                <label for="cli_ciudad " class="labelCliente">Ciudad</label>
+                <input type="text " [(ngModel)]="cliente.cli_ciudad" name="cli_ciudad" placeholder="Ingresa la ciudad  " class="inputCliente" required maxlength="35">
+            </div>
+
+            <div class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                <label for="cli_localidad " class="labelCliente">Localidad</label>
+                <input type="text " [(ngModel)]="cliente.cli_localidad" name="cli_localidad" placeholder="Ingresa la localidad  " class="inputCliente" required maxlength="35">
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_direccion " class="labelCliente">Dirección</label>
+                <input type="text " [(ngModel)]="cliente.cli_direccion" name="cli_direccion" placeholder="Ingresa el apellido Materno  " class="inputCliente" required maxlength="35">
+            </div>
+
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_numInt " class="labelCliente">No. int</label>
+                <input type="text " [(ngModel)]="cliente.cli_numInt" name="cli_numInt" placeholder="Ingresa el numero interior" class="inputCliente" required maxlength="5">
+            </div>
+
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_numExt " class="labelCliente">No. Ext</label>
+                <input type="number " [(ngModel)]="cliente.cli_numExt" name="cli_numExt" placeholder="Ingresa el numero exterior " class="inputCliente" maxlength="5">
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_cp " class="labelCliente">Codigo Postal</label>
+                <input type="text " [(ngModel)]="cliente.cli_cp" name="cli_cp" placeholder="Ingresa el codigo postal  " class="inputCliente" minlength="5" maxlength="5" required>
+            </div>
+
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_colonia " class="labelCliente">Colonia</label>
+                <input type="text " [(ngModel)]="cliente.cli_colonia" name="cli_colonia " placeholder="Ingresa la colonia  " class="inputCliente" maxlength="30" required>
+            </div>
+
+            <div class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                <label for="cli_rfc " class="labelCliente">RFC</label>
+                <input type="text " (keyup.enter)="seleccionarCliente()" [(ngModel)]="cliente.cli_rfc" name="cli_rfc" placeholder="Ingresa el RFC  " class="inputCliente" minlength="12" maxlength="13" required>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                <label for="cli_telefono" class="labelCliente">Telefono</label>
+                <input type="tel" [(ngModel)]="cliente.cli_telefono" name="cli_telefono " placeholder="Ingresa el telefono" class="inputCliente" pattern="[0-9]{10}">
+            </div>
+            <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                <label for="cli_email " class="labelCliente">Correo electronico</label>
+                <input type="text " [(ngModel)]="cliente.cli_email" name="cli_email " placeholder="Ingresa el email  " class="inputCliente " required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$">
+            </div>
+        </div>
+
+        <div>
+            <div class="row ">
+
+                <!-- Agregar -->
+                <div class="col-md-3 ">
+                    <button class="botonCliente" type="submit" (ngSubmit)="agregarCliente()">
+                        <span class="iconoCliente"><i class="fa fa-floppy-o " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <!-- Modificar -->
+                <div class="col-md-3 ">
+                    <button (click)="modificarCliente()" type=" button" class="botonCliente ">
+                        <span class="iconoCliente"><i class="fa fa-pencil-square-o " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <!-- buscar -->
+                <div class="col-md-3 ">
+                    <button type="button" class="botonCliente ">
+                        <span class="iconoCliente "><i class="fa fa-search " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <!-- Limpiar -->
+                <div class="col-md-3">
+                    <button class="botonCliente" onclick="limpiarForm()" type="button" (click)="limpiar()">
+                        <span class="iconoCliente "><i class="fa fa-eraser " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</form>
+
+
+
+
+<!-- <div class="container">
+    <h1 class="tituloDentro"></h1>
+    <form action="your-action" (ngSubmit)="agregarCliente()" #forma="ngForm">
+        <dx-form id="form" [readOnly]="false" [showColonAfterLabel]="true" [showValidationSummary]="true" validationGroup="customerData">
+            <dxi-item itemType="group" caption="Datos personales">
+
+                <dxi-item caption="cliente.cli_nombre" [(ngModel)]="cliente.cli_nombre" name="nombre" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="cli_apell_paterno" [(ngModel)]="cliente.cli_apell_paterno" name="cli_apell_paterno" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="cli_apell_materno" [(ngModel)]="cliente.cli_apell_materno" name="apell_materno" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="cli_telefono" [(ngModel)]="cliente.cli_telefono" name="cli_telefono" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="cli_email" [(ngModel)]="cliente.cli_email" name="email" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+                <dxi-item dataField="cli_rfc" [(ngModel)]="cliente.cli_rfc" name="rfc" [ngModelOptions]="{standalone: true}">
+                    <dxi-validation-rule type="required" message="Email is required">
+                    </dxi-validation-rule>
+                </dxi-item>
+
+            </dxi-item>
+
+
+
+
+        </dx-form>
+
+        <div>
+            <div class="row ">
+
+                <div class="col-md-3 ">
+                    <button class="botonCliente " type="submit">
+                        <span class="iconoCliente "><i class="fa fa-floppy-o " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <div class="col-md-3 ">
+                    <button type="submit " class="botonCliente ">
+                        <span class="iconoCliente "><i class="fa fa-pencil-square-o " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <div class="col-md-3 ">
+                    <button type="submit " class="botonCliente ">
+                        <span class="iconoCliente "><i class="fa fa-search " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+                <div class="col-md-3 ">
+                    <button class="botonCliente " type="submit ">
+                        <span class="iconoCliente "><i class="fa fa-eraser " aria-hidden="true "></i></span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div> -->

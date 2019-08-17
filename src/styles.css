@@ -1,0 +1,1059 @@
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: 'Quicksand', sans-serif;
+    background: black !important;
+}
+
+.main-container {
+    margin: 0;
+    padding: 0;
+    font-family: 'Quicksand', sans-serif;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Quicksand', sans-serif;
+}
+
+.titulosAzul {
+    color: #2274a2 !important;
+    text-align: center !important;
+    font-weight: bold !important;
+}
+
+
+/* Clases generales inicio */
+
+.centrado {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tcenter {
+    text-align: center;
+}
+
+.tDerecha {
+    text-align: right;
+}
+
+.tIzquierda {
+    text-align: left;
+}
+
+.noPaddingIzq {
+    padding-left: 0 !important;
+}
+
+.noPaddingDer {
+    padding-right: 0 !important;
+}
+
+.noPaddingExt {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+}
+
+.noMarginIzq {
+    margin-left: 0 !important;
+}
+
+.noMarginDer {
+    margin-right: 0 !important;
+}
+
+.noMarginExt {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+.noBorder {
+    border: none !important;
+}
+
+.fondoB {
+    background: white !important;
+}
+
+.fondoA {
+    background: #2274a2 !important;
+}
+
+.fondoN {
+    background: black !important;
+}
+
+.fondoAnaranjado {
+    background: #FFA346;
+}
+
+.fondoAqua {
+    background: #009C8B;
+}
+
+.fondoRojo {
+    background: #C34139;
+}
+
+.fondoVerde {
+    background: #A5DE68;
+}
+
+.marginBoTo50 {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.marginBotton {
+    margin-bottom: 100px;
+}
+
+.paddingBotton {
+    padding-bottom: 100px;
+}
+
+.paddingTop {
+    padding-top: 100px;
+}
+
+.paddingTop50 {
+    padding-top: 50px;
+}
+
+.paddingBoto25 {
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+.paddingBoto50 {
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+.paddingBoto100 {
+    padding-bottom: 100px;
+    padding-top: 100px;
+}
+
+.pb-60 {
+    padding-bottom: 60px;
+}
+
+.pt10 {
+    padding-top: 10%;
+}
+
+.pLados {
+    padding-right: 5%;
+    padding-left: 5%;
+}
+
+.cursorP {
+    cursor: pointer;
+}
+
+.fDerecha {
+    float: right;
+}
+
+.dIzquierda {
+    float: left;
+}
+
+.listFlex {
+    list-style: none;
+    display: inline-flex;
+}
+
+.modal-titulo-gral {
+    font-weight: 600;
+    font-size: 2rem;
+    display: block;
+    margin-left: auto;
+    color: #2274a2;
+}
+
+
+/* .modal-open {
+    overflow: overlay !important;
+} */
+
+
+/* .modal-backdrop {
+    position: inherit !important;
+} */
+
+
+/* clases generales fin */
+
+.menuPrincipal {
+    background: rgba(0, 0, 0, .2)
+}
+
+.nav-link {
+    color: #ffffff !important;
+    cursor: pointer;
+    font-size: 18px;
+    margin: 5px !important;
+    font-weight: 400;
+}
+
+.logo {
+    width: 20%;
+    padding: 0 !important;
+}
+
+.menuPrincipal.sleep {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    color: black;
+    transform: translateY(-100%);
+}
+
+.scrolled {
+    position: fixed;
+    z-index: 100000000 !important;
+    height: 55px !important;
+    top: 0;
+    background: black !important;
+    -webkit-transition: .0s all ease;
+    -o-transition: .0s all ease;
+    transition: .0s all ease;
+    -webkit-transform: translateY(-100%);
+    -ms-transform: translateY(-100%);
+    transform: translateY(-100%);
+    -webkit-box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px 0px rgba(0, 0, 0, 0.05);
+}
+
+.scrolled img {
+    width: 17% !important;
+    height: 10% !important;
+}
+
+.scrolled .nav-link {
+    color: white !important;
+    font-weight: 400px;
+}
+
+.scrolled .nav-link:hover {
+    color: #2274a2 !important;
+}
+
+.awake {
+    -webkit-transition: .3s all ease;
+    -o-transition: .3s all ease;
+    transition: .3s all ease;
+    -webkit-transform: translateY(0%);
+    -ms-transform: translateY(0%);
+    transform: translateY(0%);
+}
+
+.iconLenguajes {
+    width: 30px;
+    height: 30px;
+}
+
+.iconLenguajes:hover {
+    width: 30px;
+    height: 30px;
+}
+
+.nav-link {
+    color: #fff;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.nav-link:hover {
+    color: #2274a2 !important;
+}
+
+
+/* Fondos Inicio*/
+
+.bannerFacturacionBanner {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-inicio2.png");
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+
+.bannerFacturacionPreciosBanner {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-precios.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+
+.bannerFacturacionContactoBanner {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-contacto.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+
+.bannerFacturacionAvisoPrivacidadBanner {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-privacidad.jpg");
+    background-size: cover;
+    background-position: center;
+    height: 600px;
+}
+
+
+/* Fondos final*/
+
+.inicioBannerFinal2 {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-empieza-facturar.jpg");
+    background-attachment: fixed;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/* BOTONES Gral */
+
+.btn-labelFacturacion {
+    position: relative;
+    left: -12px;
+    display: inline-block;
+    padding: 6px 12px;
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px 0 0 3px;
+    color: #ffffff;
+}
+
+.btn-labeledFac {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.btnFacturacion {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+}
+
+.btnFacturacion:hover {
+    opacity: .7;
+}
+
+.btn-azul {
+    background-color: #2274a2;
+    border-color: #073B58;
+}
+
+
+/* Banners Inicio*/
+
+.inicioBannerFinal {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-empieza-facturar.jpg");
+    background-attachment: fixed;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+}
+
+.inicioBannerSeparado2 {
+    background-image: url("http://xmaz.mx/assets/img/xmaz-facturacion-banner-inicio-separado2.jpg");
+    background-attachment: fixed;
+    height: 400px;
+    background-position: center;
+    background-size: cover;
+}
+
+
+/* Banners Final*/
+
+.inicioBannerTitulo {
+    font-weight: bold;
+    color: white;
+    font-size: 3.5rem;
+}
+
+.inicioBannerSubTitulo {
+    font-weight: 700;
+    color: white;
+    font-size: 2rem;
+}
+
+.divTopBanner {
+    padding-top: 8%
+}
+
+
+/* BAnner propiedades*/
+
+.inicioBannerTituloM100 {
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.inicioBannerSubTituloM100 {
+    text-align: center;
+    font-weight: 600;
+    color: white;
+}
+
+.inicioBannerButtonM100 {
+    padding: .75rem .75rem;
+    font-weight: 500;
+    text-align: center;
+    background: #2274a2;
+    border: #fff solid 1px;
+    border-radius: 0;
+    cursor: pointer;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.inicioBannerButtonM100:hover {
+    border-radius: 15px;
+}
+
+.inicioBannerTituloFinal {
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 8%;
+}
+
+.inicioIconTrabaja {
+    font-size: 3.5rem;
+    color: #2274a2;
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+.inicioIconTituloTrabaja {
+    text-align: center;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.inicioIconSubTituloTrabaja {
+    font-weight: 500;
+    text-align: center;
+    line-height: 24px;
+    font-size: 18px;
+}
+
+.tituloDentro {
+    padding-top: 40px;
+    padding-bottom: 60px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.inicioVentajasTitulo {
+    text-align: center;
+    color: #2274a2;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.inicioVentajasParrafo {
+    text-align: justify;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+.inicioCaracteristicasIcon {
+    font-size: 3rem;
+    color: #2274a2;
+    display: block;
+    text-align: center;
+}
+
+.inicioCaracteristicasTitulo {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.inicioCaracteristicasSubTitulo {
+    text-align: center;
+    font-weight: 500;
+}
+
+
+/* Footer inicio*/
+
+.borderFooter {
+    border-right: white solid;
+    /* border-right-width: 50% !important; */
+}
+
+.tituloFooter {
+    color: #2274a2;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.footerFA {
+    color: #fff !important;
+    font-family: inherit;
+}
+
+.fa-clock-o:before {
+    content: "\f017";
+    color: #2274a2 !important;
+    margin-right: 10px;
+}
+
+.fa-phone:before {
+    content: "\f095";
+    color: #2274a2 !important;
+    margin-right: 10px;
+}
+
+.fa-envelope-o:before {
+    content: "\f003";
+    color: #2274a2 !important;
+    margin-right: 10px;
+}
+
+.fa-chevron-down {
+    cursor: pointer;
+}
+
+.footerCopry {
+    color: white !important;
+}
+
+.tituloFooterSocial {
+    color: white !important;
+    font-size: 1em !important;
+}
+
+.footerimgLogo {
+    width: 65%;
+    /* float: right; */
+    display: block!important;
+    margin-right: auto!important;
+    margin-left: auto !important;
+}
+
+.footerHorario {
+    color: white !important;
+    animation-duration: 1.5s !important;
+    margin-left: 80px;
+}
+
+.footerIconosSocial {
+    font-size: 30px;
+    color: white;
+    margin: 5px;
+    text-align: center;
+    cursor: pointer !important;
+    padding: 0 !important;
+}
+
+.footerIconosSocial:hover {
+    color: #2274a2 !important;
+}
+
+.footerImgSocial {
+    width: 25px;
+    margin: 5px;
+}
+
+.footerImgSocial:hover {
+    cursor: pointer;
+}
+
+.ulFooter {
+    list-style: none;
+    display: inline-flex;
+    margin: 0 !important;
+    padding: 0;
+}
+
+.marginfooter {
+    margin-top: 4%;
+}
+
+
+/* Footer fin*/
+
+
+/* Aviso Inicio*/
+
+.avisoPrivacidadParrafo {
+    padding-left: 10%;
+    padding-right: 10%;
+    text-align: justify;
+    line-height: 24px;
+    font-weight: 500;
+    padding-bottom: 15px;
+    font-size: 16px;
+}
+
+.avisoPrivacidadTitulo {
+    padding-left: 10%;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+
+/* Aviso Fin*/
+
+
+/* Contacto */
+
+.contactoTituloInfo {
+    text-align: center;
+    font-weight: bold;
+}
+
+.contactoSubTituloInfo {
+    text-align: center;
+    font-weight: 500;
+}
+
+.contactoInput {
+    display: block;
+    width: 100%;
+    border-radius: 10px;
+    border: black solid 1px;
+    padding: .50rem;
+}
+
+.labelContacto {
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.contactoSocial {
+    font-size: 2rem;
+    margin-right: 20px;
+    color: #2274a2;
+    cursor: pointer;
+}
+
+.contactoSocial:hover {
+    color: black;
+}
+
+.contactoLista {
+    list-style: none;
+    display: flex;
+    padding-left: 45%;
+}
+
+.contactoMapa {
+    width: 100%;
+    height: 400px;
+}
+
+
+/* contacto final */
+
+
+/* precios */
+
+.cajaPrecios {
+    border: black solid 2px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.cajaPrecios:hover {
+    transform: translate(0px, -50px);
+    transition-duration: 2s;
+}
+
+.cajaPrecioTituloColorP1 {
+    /* background: rgba(45, 52, 27, 0.9) */
+    background: #A5E899;
+}
+
+.cajaPrecioTituloColorP2 {
+    /* background: rgba(179, 246, 2, 0.4) */
+    background: #2DFA09;
+}
+
+.cajaPrecioTituloColorP3 {
+    /* background: rgba(246, 224, 2, 0.4) */
+    background: #E2D86E;
+}
+
+.cajaPrecioTituloColorP4 {
+    /* background: rgba(220, 27, 15, 0.6) */
+    background: #F7E104;
+}
+
+.cajaPrecioTituloColorP5 {
+    /* background: rgba(220, 27, 15, 0.6) */
+    background: #EE5052;
+}
+
+.cajaPrecioTituloColorP6 {
+    /* background: rgba(220, 27, 15, 0.6) */
+    background: #ED1316;
+}
+
+.cajaPrecioIcon {
+    font-size: 3rem;
+    display: block;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 15px;
+    color: #2274a2;
+}
+
+.cajaPreciosTitulo {
+    text-align: center;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.cajaPreciosSubTitulo {
+    text-align: center;
+    font-size: 25px;
+    font-weight: 900;
+    padding-top: 0;
+    padding-bottom: 10px;
+}
+
+.cajaPrecioIndicaciones {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 8px;
+    border-bottom: black solid 1px;
+}
+
+.cajaPrecioIndicacionesFinal {
+    text-align: center;
+    font-size: 18px;
+    font-weight: 600;
+    padding-bottom: 8px;
+}
+
+.preciosIva {
+    padding-top: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+
+/* dashboard */
+
+.agregarHide {
+    display: none;
+}
+
+.itemDashboard {
+    padding-left: 0;
+    margin-right: 0;
+    list-style: none;
+    background: inherit;
+    font-size: 25px;
+    color: white;
+    font-weight: 500;
+    height: 38px;
+    cursor: pointer;
+    width: 100%;
+    line-height: 40px;
+    letter-spacing: 3px;
+    line-height: 40px;
+}
+
+
+/* .itemDashboard:hover {
+    background: rgba(8, 8, 8, 0.5)
+} */
+
+.itemIcon {
+    margin-right: 10px;
+    /* color: black; */
+    margin-left: 5px;
+}
+
+.iconDashboard {
+    font-size: 3rem;
+    display: block;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    color: white;
+}
+
+.tituloDashboard {
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+.conterDashboard {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.itemAdminDashInd {
+    width: 100%;
+}
+
+.itemAdminDashInd:hover {
+    background: rgba(8, 8, 8, 0.5);
+}
+
+
+/* Clientes facturacion */
+
+.campoRequerido {
+    color: red;
+}
+
+.campoValidacion {
+    color: red;
+}
+
+.iconoClienteDesa {
+    font-size: 100px;
+    color: red;
+}
+
+.iconoClienteDesa:hover {
+    cursor: no-drop;
+}
+
+.iconoCliente {
+    font-size: 100px;
+    color: #2274a2;
+    cursor: pointer;
+}
+
+.iconoCliente:hover {
+    color: #000;
+}
+
+.listClientes {
+    display: flex;
+    list-style: none;
+}
+
+.itemList {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 10px;
+}
+
+.inputCliente {
+    width: 100%;
+    border-radius: 6px;
+    border: black inset .5px;
+    margin-bottom: 12px;
+    height: 32px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.labelCliente {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.botonCliente {
+    width: 50%;
+}
+
+::placeholder {
+    text-align: center;
+    font-weight: 400;
+}
+
+.botonesSpan {
+    margin-right: 10px;
+    background: #2274a2;
+    font-size: 1.3rem;
+    color: black;
+    font-weight: bold;
+    box-shadow: none;
+}
+
+.botonesSpan:hover {
+    background: black;
+    color: #ffffff;
+    transition-duration: 2s;
+}
+
+
+/* registro de usuario */
+
+.btnRegistro {
+    cursor: pointer;
+    padding: .60rem 1.3rem;
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+    background: #2274a2;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.btnRegistro:hover {
+    background: #000;
+    color: #2274a2;
+    transition-duration: 2s;
+}
+
+.registroTerminos {
+    font-weight: 500;
+    font-size: 14px;
+    color: black;
+    text-align: right;
+    padding-top: 20px;
+}
+
+.scroll-horizontal {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+.displayIB {
+    display: inline-block
+}
+
+
+/* Seccion ayuda */
+
+.ayudaIcono {
+    display: block;
+    text-align: center;
+    padding-top: 25px;
+    padding-bottom: 20px;
+    font-size: 4rem;
+    cursor: pointer;
+    color: #2274a2;
+}
+
+.ayudaTitulo {
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+}
+
+.ayudaTituloModal {
+    text-align: center;
+    font-weight: 600;
+}
+
+.ayudaTituloGral {
+    font-size: 3rem;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+.ayudaIconoPDF {
+    font-size: 4rem;
+    display: block;
+    text-align: center;
+    color: #2274a2;
+    font-weight: bold;
+    margin-top: 45px;
+    cursor: pointer;
+}
+
+.ayudaSubtituloPDF {
+    text-align: center;
+    color: black;
+    font-weight: bold;
+}
+
+
+/* Facturacion */
+
+.tituloFacturacion {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 10px;
+    font-size: 2rem;
+    color: #2274a2;
+}
+
+.facturacionImpuestoList {
+    font-weight: bold;
+    font-size: 20px;
+    color: black
+}
+
+.facturacionBorder {
+    border: #2274a2 solid 1px;
+}
+
+.faPaTOBO20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.cursorNo {
+    cursor: no-drop;
+}
+
+input:focus {
+    background: #F7FF00;
+}
+
+.btn-buscar {
+    background: #2274a2;
+    color: #000;
+    font-size: 20px;
+    border-radius: 96%;
+    box-shadow: none;
+    text-shadow: none;
+    border-style: none;
+    border: black 1px solid;
+    width: auto;
+    height: auto;
+}
+
+.btn-buscar:hover {
+    color: #2274a2;
+    background: #000;
+    transition-duration: 1s;
+}
+
+.facturacionAcciones {
+    margin-left: 20px;
+    font-size: 2.5rem;
+    cursor: pointer;
+    color: #2274a2;
+    font-weight: 400;
+}
+
+.facturacionTituloModal {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    font-size: 2rem;
+    color: #2274a2;
+}

@@ -1,0 +1,173 @@
+<div class="fondoB">
+    <form (ngSubmit)="actualizarEmpresa()">
+        <aw-wizard>
+            <aw-wizard-step stepTitle="Datos generales" style="height: 800px;">
+                <div class="container">
+                    <!-- <form (ngSubmit)="actualizarEmpresa()"> -->
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Nombre de la empresa</label>
+                            <input [(ngModel)]="empresa.emp_nomempresa" name="emp_nomempresa" type="text" required="required" class="inputCliente" placeholder="Ingrese el nombre(s) " />
+                        </div>
+
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Razon social</label>
+                            <input [(ngModel)]="empresa.emp_razonsocial" name="emp_razonsocial" type="text" required="required" class="inputCliente" placeholder="Ingrese el nombre(s) " />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Direccion</label>
+                            <input [(ngModel)]="empresa.emp_direccion" name="emp_direccion" maxlength="50" type="text" required="required" class="inputCliente" placeholder="Ingrese la direcció" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Num int</label>
+                            <input [(ngModel)]="empresa.emp_numInt" name="emp_numInt" maxlength="5" type="text" required="required" class="inputCliente" placeholder="Ingrese el numero interior" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Num Ext</label>
+                            <input [(ngModel)]="empresa.emp_numExt" name="emp_numExt" type="text" class="inputCliente" placeholder="Ingrese el numero exterior" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Colonia</label>
+                            <input [(ngModel)]="empresa.emp_colonia" name="emp_colonia" type="text" required="required" class="inputCliente" placeholder="Ingrese la colonia" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">País</label>
+                            <input [(ngModel)]="empresa.emp_pais" name="emp_pais" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrese el País" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Estado</label>
+                            <select [(ngModel)]="empresa.emp_estado" name="emp_estado" id="inputState " class="inputCliente " class="inputCliente" required>
+                              <option value="">Seleccione un Estado</option>
+                              <option *ngFor="let estado of listaEstado" [value]="estado">{{estado}}</option>
+                          </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Municipio</label>
+                            <input [(ngModel)]="empresa.emp_municipio" name="emp_municipio" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrese el municipio" />
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Localidad</label>
+                            <input [(ngModel)]="empresa.emp_localidad" name="emp_localidad" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrece la localidad" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Codigo postal</label>
+                            <input [(ngModel)]="empresa.emp_cp" name="emp_cp" type="number" value="Sinaloa" required="required" class="inputCliente" placeholder="Ingrese el codigo postal" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">RFC</label>
+                            <input [ngModel]="empresa.emp_rfc | uppercase" name="emp_rfc" (ngModelChange)="empresa.emp_rfc=$event" type="text" required="required" class="inputCliente" placeholder="Ingrese el RFC" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Correo contacto</label>
+                            <input disabled [(ngModel)]="empresa.emp_email" name="emp_email" type="email" required="required" class="inputCliente" placeholder="Ingrese el correo electronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Telefono</label>
+                            <input [(ngModel)]="empresa.emp_telefono" name="emp_telefono" type="tel" class="inputCliente" placeholder="Ingrese el telefono" pattern="[0-9]{10}" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <!-- <label class="control-label">Tipo de factura</label>
+                            <input [(ngModel)]="empresa.emp_tipo_factura" name="emp_tipo_factura" type="tel" class="inputCliente" placeholder="Ingrese el telefono" pattern="[0-9]{10}" /> -->
+                            <label for="inputState " class="labelCliente ">Regimen Fiscal</label>
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="empresa.emp_regimenfiscal_codigo" name="emp_regimenfiscal_codigo">
+                                    <option value="">Seleccione un Regimen fiscal</option>
+                                    <option *ngFor="let regimen of regimenFiscal" value="{{regimen.regimen_codigo}}"> {{regimen.regimen_nombre}} </option>
+                                </select>
+                        </div>
+
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                            <input [(ngModel)]="empresa.emp_logo" name="emp_logo" type="file" id="file" (change)="onFileChange()" />
+
+                            <div style="width: 150px; height: 150px;">
+                                <img id="imagePreview" src="" alt="" style="width: 150px; height: 150px;">
+                                <img style="width: 150px; height: 150px;" src="" alt="No cargo la imagen">
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="centrado tcenter">
+                        <button awNextStep type="button" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                                <span class="btn-labelFacturacion"><i class="fa fa-arrow-right"></i></span>Siguiente
+                            </button>
+                    </div>
+
+
+                    <!-- </form> -->
+                </div>
+
+            </aw-wizard-step>
+
+            <aw-wizard-step stepTitle="Certificados" awOptionalStep style="height: 600px;">
+                <div class="container">
+                    <!-- <form action=""> -->
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <label for="">Llave</label>
+                            <input [(ngModel)]="configuracion.emp_llave" name="emp_llave" (change)="onLlaveChange()" type="file" id="llave" />
+                        </div>
+                        <div class="col-md-6">
+
+                            <label for="">Certificado</label>
+                            <input [(ngModel)]="configuracion.emp_certificado" name="emp_certificado" (change)="onCertificadoChange()" type="file" id="certificado" />
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Password llave privada</label>
+                            <input [(ngModel)]="configuracion.emp_password" name="emp_password" type="password" class="inputCliente" placeholder="Ingrese la contrasella de llave privada" />
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <div id="fileuploader-container">
+                                <dx-file-uploader [(ngModel)]="configuracion.emp_rutaxml" name="emp_rutaxml" [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [maxFileSize]="4000000" selectButtonText="Seleccionar la ruta de xml" accept="image/*" uploadMode="useForm" [maxFileSize]="4000000">>
+                                </dx-file-uploader>
+                            </div>
+                        </div> -->
+                        <div class="col-md-12">
+                            <label for="control-label">Licencia del producto</label>
+                            <textarea [(ngModel)]="configuracion.emp_licencia" name="emp_licencia" id="" cols="10" rows="10" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+                    <!-- </form> -->
+                </div>
+                <div class="centrado tcenter">
+                    <button awPreviousStep type="button" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                            <span class="btn-labelFacturacion"><i class="fa fa-arrow-left"></i></span>Anterior
+                        </button>
+                    <button awNextStep type="button" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                            <span class="btn-labelFacturacion"><i class="fa fa-arrow-right"></i></span>Siguiente
+                        </button>
+                </div>
+            </aw-wizard-step>
+
+            <aw-wizard-step stepTitle="Guardar" style="height: 600px;">
+
+                <div class="container centrado tcenter">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <button type="submit" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                                <span class="btn-labelFacturacion"><i class="fa fa-floppy-o"></i></span>Guardar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="centrado tcenter">
+                    <button awPreviousStep type="button" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                        <span class="btn-labelFacturacion"><i class="fa fa-arrow-left"></i></span>Anterior
+                    </button>
+
+                </div>
+            </aw-wizard-step>
+
+        </aw-wizard>
+    </form>
+</div>

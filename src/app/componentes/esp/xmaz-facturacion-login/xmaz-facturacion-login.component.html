@@ -1,0 +1,61 @@
+<app-menu></app-menu>
+
+<div class="inicioBannerFinal2">
+    <div class="container h-100 paddingBoto100">
+        <div class="d-flex justify-content-center h-100 paddingBoto100">
+            <div class="user_card">
+                <div class="d-flex justify-content-center">
+                    <div class="brand_logo_container">
+                        <img src="http://xmaz.mx/assets/img/logoSlider.png" class="w-100" alt="Logo">
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center form_container">
+                    <form (ngSubmit)="login()">
+                        <div class="input-group mb-3" [formGroup]="grupoLogin">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-user"></i></span>
+                            </div>
+                            <input formControlName="emp_usuario_login" [(ngModel)]="empresaLogin.emp_usuario_login" type="email" name="emp_usuario_login" class="form-control input_user" placeholder="Usuario">
+                        </div>
+                        <div class="campoValidacion" *ngIf="grupoLogin.controls['emp_usuario_login'].errors?.minlength">
+                            Debe de tener al menos 8 letras
+                        </div>
+                        <div class="input-group mb-2" [formGroup]="grupoLogin">
+                            <div class="input-group-append">
+                                <span class="input-group-text"><i class="fa fa-key"></i></span>
+                            </div>
+                            <input formControlName="emp_contrasena_login" [(ngModel)]="empresaLogin.emp_contrasena_login" type="password" name="emp_contrasena_login" class="form-control input_pass" placeholder="Contraseña">
+                        </div>
+                        <div class="campoValidacion" *ngIf="grupoLogin.controls['emp_contrasena_login'].errors?.minlength">
+                            Debe de tener al menos 5 letras
+                        </div>
+
+                        <!-- <div class="form-group">
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="customControlInline">
+                                <label class="custom-control-label" for="customControlInline">Remember me</label>
+                            </div>
+                        </div> -->
+
+                        <div class="d-flex justify-content-center mt-3 login_container">
+                            <button type="submit" class="btn login_btn">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="mt-4">
+
+                    <div class="d-flex justify-content-center links">
+                        <a href="#" style="color: black">Olvidaste tu contraseña?</a>
+                    </div>
+                    <div class="d-flex justify-content-center links">
+                        <a [routerLink]="['/XmazRegistro']" style="color: black">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
+
+<app-footer></app-footer>

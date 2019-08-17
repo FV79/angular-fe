@@ -1,0 +1,90 @@
+<app-menu></app-menu>
+
+<div class="fondoB">
+
+    <div class="bannerFacturacionContactoBanner">
+        <div class="centrado tcenter pt10">
+            <h1 class="inicioBannerTitulo">Contactate con nosotros</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1 class="tituloDentro">Contactanos</h1>
+        <div class="row" style="margin-bottom: 70px;">
+            <div class="col md-6 col-lg-6 col-sm-12">
+                <h3 class="">Nos pondremos en contacto contigo lo antes posible</h3>
+
+                <form action="">
+                    <div class="form-group">
+                        <label for="nombreContacto" class="labelContacto">Nombre</label>
+                        <input type="text" class="contactoInput" id="nombreContacto" name="contactoNombre" placeholder="Ingresa tu nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="emailContacto" class="labelContacto">Correo Electronico</label>
+                        <input type="emaiil" class="contactoInput" id="emailContacto" name="contactoCorreo" placeholder="Ingresa tu correo electronico">
+                    </div>
+                    <div class="form-group">
+                        <label for="asuntoContacto" class="labelContacto">Asunto</label>
+                        <input type="text" class="contactoInput" id="asuntoContacto" name="contactoAsunto" placeholder="Ingresa el asunto del mensaje">
+                    </div>
+                    <div class="form-group">
+                        <label for="mensajeContacto" class="labelContacto">Mensaje</label>
+                        <textarea class="contactoInput" id="mensajeContacto" rows="3" name="contactoMensaje" placeholder="Ingresa el mensaje"></textarea>
+                    </div>
+
+                    <button type="submit" class="inicioBannerButtonM100">Enviar</button>
+
+                </form>
+
+            </div>
+            <div class="col md-6 col-lg-6 col-sm-12">
+                <div style="padding-top: 10%;">
+                    <h1 class="contactoTituloInfo">Dirección</h1>
+                    <h3 class="contactoSubTituloInfo">C. Veracruz #1136, Sanchez Celis Mazatlán Sinaloa</h3>
+
+                    <h1 class="contactoTituloInfo">Telefonos</h1>
+                    <a href="tel:{{location.phoneNumber}}">
+                        <h3 class="contactoSubTituloInfo">(669) 6687711</h3>
+                    </a>
+
+                    <h1 class="contactoTituloInfo">Correo Electronico</h1>
+                    <a [href]="mailText">
+                        <h3 class="contactoSubTituloInfo">contacto@xmaz.mx</h3>
+                    </a>
+
+                    <div>
+                        <h3 class="contactoTituloInfo">Siguenos en nuestras redes sociales</h3>
+                        <ul class="contactoLista">
+                            <a href="https://www.facebook.com/Pescados-Envasados-de-Sinaloa-283399709251748/" target="_blank">
+                                <li><i class="fa fa-facebook contactoSocial" aria-hidden="true"></i></li>
+                            </a>
+                            <a href="https://www.youtube.com/channel/UCoCcDpGeiD5AUwVURshjatQ" target="_blank">
+                                <li><i class="fa fa-youtube contactoSocial" aria-hidden="true"></i></li>
+                            </a>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" class="noPadding">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d916.4860382334459!2d-106.42988621187635!3d23.245119231288324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x869f535cd0556903%3A0xfa483f14b2dd53d8!2sVeracruz+1136%2C+Sanchez+Celis%2C+82120+Mazatl%C3%A1n%2C+Sin.!5e0!3m2!1ses!2smx!4v1554847542952!5m2!1ses!2smx"
+            frameborder="0" class="contactoMapa" allowfullscreen></iframe>
+    </div>
+
+    <div class="container-fluid">
+        <h1 class="tituloDentro">Dejanos ser tu empresa de confianza</h1>
+    </div>
+
+    <div class="container-fluid inicioBannerFinal">
+        <div>
+            <h1 class="inicioBannerTituloFinal">Empieza a facturar</h1>
+            <button class="inicioBannerButtonM100" routerLink="/xmazFacturacionContacto" onclick="subir()">Contactanos</button>
+        </div>
+    </div>
+</div>
+
+
+<app-footer></app-footer>

@@ -1,0 +1,129 @@
+@media screen and (max-width: 500px) {
+    .inicioBannerTituloFinal {
+        padding-top: 45% !important;
+    }
+    .marginfooter {
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+    }
+    .footerHorario {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        margin-left: 110px !important;
+        font-size: 18px !important;
+    }
+    .borderFooter {
+        border-right: none !important;
+    }
+    .footerimgLogo {
+        float: none !important;
+        width: 30% !important;
+    }
+    .footerHorario {
+        margin-left: 0 !important;
+    }
+    .divTopBanner {
+        padding-top: 30% !important;
+    }
+    .logo {
+        width: 100px !important;
+    }
+}
+
+@media only screen and (max-width: 1024px) and (min-width: 501px) {
+    .spanHorariosFooter {
+        margin-left: 80px !important;
+    }
+    .footerHorario {
+        margin-left: 0px !important;
+        font-size: 13px !important;
+    }
+    .divTopBanner {
+        padding-top: 16% !important;
+    }
+    .logo {
+        width: 100px !important;
+    }
+}
+
+@media only screen and (max-width: 1366px) and (min-width: 1024px) {
+    .footerHorario {
+        margin-left: 32px!important;
+    }
+    .tituloFooter {
+        margin-top: 14px;
+    }
+    .footerHorario {
+        margin-left: 37px!important;
+    }
+    .divTopBanner {
+        padding-top: 13% !important;
+    }
+    .logo {
+        width: 100px !important;
+    }
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 1025px) {
+    .footerHorario {
+        margin-left: 50px !important;
+    }
+    .divTopBanner {
+        padding-top: 12% !important;
+    }
+}
+
+@media only screen and (max-width: 1680px) and (min-width: 1441px) {
+    .divTopBanner {
+        padding-top: 12% !important;
+    }
+}
+
+@media only screen and (max-width: 1920px) and (min-width: 1680px) {
+    /* PC full hd */
+}
+
+@media only screen and (max-width: 2560px) and (min-width: 1921px) {
+    .divTopBanner {
+        padding-top: 7% !important;
+    }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 1224px) and (orientation:landscape) {
+    .footerHorario {
+        display: block !important;
+    }
+    .footerimgLogo {
+        width: 100% !important;
+    }
+    .ulFooter {
+        list-style: none;
+        display: block !important;
+        margin: 0 !important;
+        padding: 0;
+    }
+    .tituloFooter {
+        color: #2274a2;
+        font-size: .8em !important;
+        margin-top: 33px;
+    }
+    .footerHorario {
+        margin-left: 0px !important;
+        font-size: 10px !important;
+    }
+    .copry {
+        margin-top: -30px !important;
+    }
+    .textoFooter {
+        font-size: 12px !important;
+    }
+    .footerIconosSocial {
+        font-size: 20px !important;
+    }
+    .tituloFooterSocial {
+        margin-top: 25px !important;
+        color: white !important;
+        font-size: 0.7em !important;
+    }
+}

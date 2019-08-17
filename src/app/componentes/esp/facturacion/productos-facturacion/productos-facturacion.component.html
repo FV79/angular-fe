@@ -1,0 +1,565 @@
+<div class="fondoB">
+    <dx-tab-panel #tabPanel [height]="" [dataSource]="pestanasProducto" [selectedIndex]="0" [loop]="true" [animationEnabled]="true" [swipeEnabled]="true">
+        <div *dxTemplate="let pestana of 'title'">
+            <span>{{pestana.nombrePestanaProducto}}</span>
+
+        </div>
+        <div *dxTemplate="let pestana of 'item'">
+            <div style="height:auto">
+
+                <div *ngIf="pestana.nombrePestanaProducto == 'Productos'">
+                    <div>
+                        <h1 class="tituloDentro">Productos</h1>
+
+                        <div class="table-responsive">
+                            <input (ngModelChange)="FiltroArticulos($event)" [(ngModel)]="filtroArticulo" class="form-control" type="text" placeholder="Buscar producto...">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Clave Producto</th>
+                                        <th>Clave producto Sat</th>
+                                        <th>Precio</th>
+                                        <th>Costo</th>
+                                        <th>Impuesto</th>
+                                        <th>Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let producto of productoMostrar;let index = index">
+                                        <td>{{producto.pro_nombre}}</td>
+                                        <td>{{producto.pro_clave}}</td>
+                                        <td>{{producto.pro_clave_sat}}</td>
+                                        <td>{{producto.pro_precio}}</td>
+                                        <td>{{producto.pro_costo}}</td>
+                                        <td>{{producto.pro_IVA}}</td>
+                                        <td>
+                                            <button *ngIf="producto.pro_status == 1" class="btn btn-primary" (click)="eliminar(producto.codArticulo)">Desactivar</button>
+                                            <button *ngIf="producto.pro_status == 0" class="btn btn-primary" (click)="reactivar(producto.codArticulo)">Activar</button>
+                                            <button (click)="productoModificar = producto" class="btn btn-primary" style="margin-left: 10px" data-toggle="modal" data-target="#modalEditar">Editar</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="scroll-horizontal">
+                                <div *ngFor="let pagina of numPaginasArticulos" class="displayIB">
+                                    <button (click)="cambiarPaginaArticulos(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="pestana.nombrePestanaProducto == 'Agregar Producto'">
+
+                    <div class="pLados">
+                        <h1 class="tituloDentro">Agregar producto</h1>
+                        <form>
+
+                            <div class="container">
+                                <button (click)="agregarProducto()" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-floppy-o"></i></span>Guardar
+                                </button>
+                                <button (click)="limpiar()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-eraser"></i></span>Limpiar
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-md-10 col-sm-10 col-lg-10 col-xl-10">
+                                            <label class="labelCliente">Codigo SAT</label>
+                                            <input [readonly]="true" [(ngModel)]="producto2.pro_clave" name="pro_clave" type="text" class="inputCliente" placeholder="Ingrese el Codigo SAT">
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                                            <button (click)="ReiniciarNumPalabras()" type="button" data-toggle="modal" data-target="#modalProductoSATEmpresa" class="btn-buscar"> <span> <i class="fa fa-search" aria-hidden="true"></i></span> </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <label class="labelCliente">Codigo del producto</label>
+                                    <input [(ngModel)]="producto2.pro_clave_sat" name="pro_clave_sat" type="text" class="inputCliente" placeholder="Ingrese el Codigo del producto">
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                                    <label class="labelCliente">Nombre del producto</label>
+                                    <input [(ngModel)]="producto2.pro_nombre" name="pro_nombre" type="text" class="inputCliente" placeholder="Ingrese el nombre del producto">
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                                    <label class="labelCliente">Costo del producto</label>
+                                    <input [(ngModel)]="producto2.pro_costo" name="pro_costo" type="number" class="inputCliente" placeholder="Ingrese el costo del producto">
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                                    <label class="labelCliente">Precio del producto</label>
+                                    <input [(ngModel)]="producto2.pro_precio" name="pro_precio" type="number" class="inputCliente" placeholder="Ingrese el precio del producto">
+                                </div>
+
+                                <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                                    <label class="labelCliente">Descuento del producto</label>
+                                    <input [(ngModel)]="producto2.pro_descuento" name="pro_descuento" type="number" class="inputCliente" placeholder="Ingrese el descuento del producto">
+                                </div>
+
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <label class="labelCliente">Unidad de medida SAT</label>
+                                            <input [readonly]="true" [(ngModel)]="producto2.pro_unidad_medida" name="pro_unidad_medida" type="text" class="inputCliente" placeholder="Ingrese la unidad de medida">
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button (click)="ReiniciarNumPalabras()" type="button" data-toggle="modal" data-target="#modalUDMEmpresa" class="btn-buscar"> <span> <i class="fa fa-search" aria-hidden="true"></i></span> </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                                    <h4>Seleccionar impuestos del producto</h4>
+                                    <div class="form-check form-check-inline">
+                                        <input [(ngModel)]="producto2.pro_IVA" name="pro_IVA" class="form-check-input" type="checkbox" id="impuestoIVA" value="true">
+                                        <label class="form-check-label" for="impuestoIVA">I.V.A</label>
+                                    </div>
+                                    <!-- <div class="form-check form-check-inline">
+                                        <input [(ngModel)]="producto2.pro_ISR" name="pro_ISR" class="form-check-input" type="checkbox" id="impuestoISR" value="true">
+                                        <label class="form-check-label" for="impuestoISR">I.S.R</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input [(ngModel)]="pro_ISH" name="pro_ISH" class="form-check-input" type="checkbox" id="impuestoISH" value="option3">
+                                        <label class="form-check-label" for="impuestoISH">I.S.H</label>
+                                        <input *ngIf="pro_ISH" [(ngModel)]="producto2.pro_ISH" name="pro_ISH" class="inputCliente" type="text">
+                                    </div> -->
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <div *ngIf="pestana.nombrePestanaProducto == 'Unidades de medida SAT'">
+                    <div class="pLados">
+                        <h1 class="tituloDentro">Agregar Unidad de Medida SAT</h1>
+                        <form>
+
+                            <div>
+                                <button (click)="ReiniciarNumPalabras()" type="button" class="btnFacturacion btn-labeledFac btn-azul" data-toggle="modal" data-target="#modalUDM">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-search"></i></span>Buscar
+                                </button>
+                                <button (click)="insertarMedidaSatEmpresa()" (click)="insertarMedidaSatEmpresa()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-floppy-o"></i></span>Guardar
+                                </button>
+
+                                <button (click)="limpiarUnidades()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
+                                    <span class="btn-labelFacturacion"><i class="fa fa-eraser"></i></span>Limpiar
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <label for="" class="labelCliente">Clave Unidad Medida SAT</label>
+                                    <input disabled [(ngModel)]="catUnidadMedidaSAT.codigo" name="codigo" type="text" class="inputCliente" placeholder="ingresa la clave del sat">
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <label for="" class="labelCliente">Nombre Unidad de Medida SAT</label>
+                                    <input disabled [(ngModel)]="catUnidadMedidaSAT.nombre" name="nombre" type="text" class="inputCliente" placeholder="ingresa la clave del sat">
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <input (ngModelChange)="FiltroUMSEmpresa($event)" [(ngModel)]="filtroUMSEmpresa" class="form-control" type="text" placeholder="Buscar...">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let medida of _unidadMedidaEmpresaMostrar;let index = index">
+                                        <td>{{medida.id_unidad_sat}}</td>
+                                        <td>{{medida.codigo}}</td>
+                                        <td>{{medida.nombre}}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                            <div class="scroll-horizontal">
+                                <div *ngFor="let pagina of numPaginasEmpresa" class="displayIB">
+                                    <button (click)="cambiarPaginaUMSE(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="pestana.nombrePestanaProducto == 'Productos SAT'">
+                    <div class="pLados">
+                        <h1 class="tituloDentro">Agregar producto SAT</h1>
+                        <form>
+
+                            <div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <button (click)="ReiniciarNumPalabras()" type="button" class="btnFacturacion btn-labeledFac btn-azul" data-toggle="modal" data-target="#modalProductoSAT">
+                                                <span class="btn-labelFacturacion"><i class="fa fa-search"></i></span>Buscar
+                                            </button>
+                                            <button (click)="insertarProductoSATEmpresa()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
+                                                <span class="btn-labelFacturacion"><i class="fa fa-floppy-o"></i></span>Guardar
+                                            </button>
+
+                                            <button (click)="limpiarProductos()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
+                                                <span class="btn-labelFacturacion"><i class="fa fa-eraser"></i></span>Limpiar
+                                            </button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <label for="" class="labelCliente">Clave Producto SAT</label>
+                                    <input disabled [(ngModel)]="catProductoSAT.codigo" name="codigo" type="text" class="inputCliente" placeholder="ingresa la clave del sat">
+                                </div>
+                                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                                    <label for="" class="labelCliente">Nombre Producto SAT</label>
+                                    <input disabled [(ngModel)]="catProductoSAT.nombre" name="nombre" type="text" class="inputCliente" placeholder="ingresa la clave del sat">
+                                </div>
+                            </div>
+                        </form>
+                        <div>
+                            <input (ngModelChange)="FiltroPSATEmpresa($event)" [(ngModel)]="filtroProductoEmpresa" class="form-control" type="text" placeholder="Buscar...">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Codigo</th>
+                                        <th>Nombre</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr onclick="$('#modalProductoSATEmpresa').modal('hide')" *ngFor="let producto of productosSATempresaMostrar;let index = index">
+                                        <td>{{producto.id_producto_sat}}</td>
+                                        <td>{{producto.codigo}}</td>
+                                        <td>{{producto.nombre}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="scroll-horizontal">
+                                <div *ngFor="let pagina of numPaginasProductoEmpresa" class="displayIB">
+                                    <button (click)="cambiarPaginaPSATEmpresa(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </dx-tab-panel>
+    <div class="item-box">
+        Producto <span>{{tabPanel.selectedIndex + 1}}</span> de <span>{{pestanasProducto.length}}</span>
+    </div>
+</div>
+
+
+<!-- Modal UDM SAT -->
+<div class="modal fade bd-example-modal-lg" id="modalUDMEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Unidad de Medida</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h6>Elige la unidad de medida SAT</h6>
+                <div>
+                    <input (ngModelChange)="FiltroUMSEmpresa($event)" [(ngModel)]="filtroUMSEmpresa" class="form-control" type="text" placeholder="Buscar...">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="traerMedidaEmpresa(index)" onclick="$('#modalUDMEmpresa').modal('hide')" *ngFor="let medida of _unidadMedidaEmpresaMostrar;let index = index">
+                                <td>{{medida.id_unidad_sat}}</td>
+                                <td>{{medida.codigo}}</td>
+                                <td>{{medida.nombre}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="scroll-horizontal">
+                        <div *ngFor="let pagina of numPaginasEmpresa" class="displayIB">
+                            <button (click)="cambiarPaginaUMSE(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Unidades de medida SAT -->
+<div class="modal fade bd-example-modal-lg" id="modalUDM" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Unidad de Medida</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <h6>Elige la unidad de medida SAT</h6>
+                <div>
+                    <!-- <dx-data-grid #grid id="gridContainer" [dataSource]="_unidadMedida" keyExpr="id_unidad" [hoverStateEnabled]="true" [showBorders]="true" [selectedRowKeys]="[]">
+                        <dxo-search-panel [visible]="true" [width]="240" placeholder="Buscar..."></dxo-search-panel>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxi-column (click)="traerMedida(grid.instance.getSelectedRowsData()[0])" dataField="id_unidad" caption="Clave del producto"></dxi-column>
+                        <dxi-column dataField="codigo" caption="Codigo de la uidad"></dxi-column>
+                        <dxi-column dataField="nombre" caption="Nombre de la unidad "></dxi-column>
+                    </dx-data-grid>
+                     <div id="employeeInfo" *ngIf="grid.selectedRowKeys.length">
+                        <p> {{grid.instance.getSelectedRowsData()[0]}} </p>
+                    </div>  -->
+                    <input (ngModelChange)="FiltroUMS($event)" [(ngModel)]="filtroUMS" class="form-control" type="text" placeholder="Buscar...">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="traerMedida(index)" onclick="$('#modalUDM').modal('hide')" *ngFor="let medida of _unidadMedidaMostrar;let index = index">
+                                <td>{{medida.id_unidad}}</td>
+                                <td>{{medida.codigo}}</td>
+                                <td>{{medida.nombre}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <div class="scroll-horizontal">
+                        <div *ngFor="let pagina of numPaginas" class="displayIB">
+                            <button (click)="cambiarPaginaUMS(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Productos del SAT-->
+<div class="modal fade" id="modalProductoSAT" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Productos SAT</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <h6>Elige El producto SAT</h6>
+                <div>
+                    <input (ngModelChange)="FiltroPSAT($event)" [(ngModel)]="filtroProducto" class="form-control" type="text" placeholder="Buscar...">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="traerProducto(index)" onclick="$('#modalProductoSAT').modal('hide')" *ngFor="let producto of _claveProductoSatMostrar;let index = index">
+                                <td>{{producto.id_producto}}</td>
+                                <td>{{producto.codigo}}</td>
+                                <td>{{producto.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="scroll-horizontal">
+                        <div *ngFor="let pagina of numPaginasProducto" class="displayIB">
+                            <button (click)="cambiarPaginaPSAT(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                        </div>
+                    </div>
+
+                    <!-- <dx-data-grid #grid2 id="gridContainer2" [dataSource]="_claveProductoSat" keyExpr="id_producto" [hoverStateEnabled]="true" [showBorders]="true" [selectedRowKeys]="[]">
+                        <dxo-search-panel [visible]="true" [width]="240" placeholder="Buscar..."></dxo-search-panel>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxo-selection mode="single"></dxo-selection>
+                        <dxi-column dataField="id_producto" caption="ID del producto"></dxi-column>
+                        <dxi-column dataField="codigo" caption="Codigo del Producto"></dxi-column>
+                        <dxi-column dataField="nombre" caption="Nombre del producto"></dxi-column>
+                    </dx-data-grid>
+                    <div id="employeeInfo" *ngIf="grid.selectedRowKeys.length">
+                        <p> {{grid2.instance.getSelectedRowsData()[0].id_producto}} </p>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal productos SAT filtados-->
+<div class="modal fade" id="modalProductoSATEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Productos SAT de empresa</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <h6>Elige El producto SAT</h6>
+                <div>
+                    <input (ngModelChange)="FiltroPSATEmpresa($event)" [(ngModel)]="filtroProductoEmpresa" class="form-control" type="text" placeholder="Buscar...">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Codigo</th>
+                                <th>Nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="traerProductoEmpresa(index)" onclick="$('#modalProductoSATEmpresa').modal('hide')" *ngFor="let producto of productosSATempresaMostrar;let index = index">
+                                <td>{{producto.id_producto_sat}}</td>
+                                <td>{{producto.codigo}}</td>
+                                <td>{{producto.nombre}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="scroll-horizontal">
+                        <div *ngFor="let pagina of numPaginasProductoEmpresa" class="displayIB">
+                            <button (click)="cambiarPaginaPSATEmpresa(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal editar empresa -->
+<div class="modal fade bd-example-modal-lg" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Editar producto</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                            <div class="row">
+                                <div class="col-md-10 col-sm-10 col-lg-10 col-xl-10">
+                                    <label class="labelCliente">Codigo SAT</label>
+                                    <input disabled [(ngModel)]="productoModificar.pro_clave" name="pro_clave" type="text" class="inputCliente" placeholder="Ingre el Codigo SAT">
+                                </div>
+                                <div class="col-md-2 col-sm-2 col-lg-2 col-xl-2">
+                                    <button (click)="ReiniciarNumPalabras()" type="button" data-toggle="modal" data-target="#modalProductoSATEmpresa"> <span> <i class="fa fa-search" aria-hidden="true"></i></span> </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                            <label class="labelCliente">Codigo del producto</label>
+                            <input [(ngModel)]="productoModificar.pro_clave_sat" name="pro_clave_sat" type="text" class="inputCliente" placeholder="Ingrese el Codigo del producto">
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                            <label class="labelCliente">Nombre del producto</label>
+                            <input [(ngModel)]="productoModificar.pro_nombre" name="pro_nombre" type="text" class="inputCliente" placeholder="Ingrese el nombre del producto">
+                        </div>
+
+                        <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                            <label class="labelCliente">Costo del producto</label>
+                            <input [(ngModel)]="productoModificar.pro_costo" name="pro_costo" type="number" class="inputCliente" placeholder="Ingrese el costo del producto">
+                        </div>
+
+                        <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                            <label class="labelCliente">Precio del producto</label>
+                            <input [(ngModel)]="productoModificar.pro_precio" name="pro_precio" type="number" class="inputCliente" placeholder="Ingrese el precio del producto">
+                        </div>
+
+                        <div class="col-md-4 col-lg-4 col-xl-4 col-sm-4">
+                            <label class="labelCliente">Descuento del producto</label>
+                            <input [(ngModel)]="productoModificar.pro_descuento" name="pro_descuento" type="number" class="inputCliente" placeholder="Ingrese el descuento del producto">
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-xl-6 col-sm-6">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <label class="labelCliente">Unidad de medida SAT</label>
+                                    <input [(ngModel)]="productoModificar.pro_unidad_medida" name="pro_unidad_medida" type="text" class="inputCliente" placeholder="Ingrese la unidad de medida">
+                                </div>
+                                <div class="col-md-2">
+                                    <button (click)="ReiniciarNumPalabras()" type="button" data-toggle="modal" data-target="#modalUDMEmpresa"> <span> <i class="fa fa-search" aria-hidden="true"></i></span> </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
+                            <h4>Seleccionar impuestos del producto</h4>
+                            <div class="form-check form-check-inline">
+                                <input [(ngModel)]="productoModificar.pro_IVA" name="pro_IVA" class="form-check-input" type="checkbox" id="impuestoIVA" value="true">
+                                <label class="form-check-label" for="impuestoIVA">I.V.A</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input [(ngModel)]="productoModificar.pro_ISR" name="pro_ISR" class="form-check-input" type="checkbox" id="impuestoISR" value="true">
+                                <label class="form-check-label" for="impuestoISR">I.S.R</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input [(ngModel)]="pro_ISH" name="pro_ISH" class="form-check-input" type="checkbox" id="impuestoISH" value="option3">
+                                <label class="form-check-label" for="impuestoISH">I.S.H</label>
+                                <input *ngIf="pro_ISH" [(ngModel)]="productoModificar.pro_ISH" name="pro_ISH" class="inputCliente" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="centrado tcenter marginBoTo50">
+                        <button (click)="agregarProducto()" type="submit" class="btn btn-lg btn-outline-success">Agregar</button>
+                        <button type="button" class="btn btn-lg btn-outline-warning" (click)="limpiar()">Limpiar</button>
+                    </div> -->
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                <button (click)="modificarProducto()" type="button" class="btn btn-success" data-dismiss="modal">Modificar</button>
+            </div>
+        </div>
+    </div>
+</div>

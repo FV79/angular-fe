@@ -1,0 +1,50 @@
+<div class="container-fluid animated fadeIn uno" style="background: black">
+    <br><br>
+    <div class="row" style="display: flex; justify-content: center; align-content: center; padding-left: 5%; padding-right: 5%">
+
+        <div class="col-sm-2 borderFooter">
+            <img src="http://xmaz.mx/assets/img/logoSlider.png" alt="Xmaz logo oficial" class="img-fluid footerimgLogo" [routerLink]="['/xmazPruebaDev']">
+        </div>
+
+        <div class="col-sm-3 marginfooter">
+            <h1 class="tituloFooter text-center">¡CONTÁCTANOS!</h1>
+            <span class="text-center footerHorario"><i class="fa fa-clock-o footerFa" aria-hidden="true"></i>Lun - Vie: 9:00 a.m - 6:00 p.m</span>
+            <br> <br>
+            <span style="color: white" class="text-center footerHorario copry" routerLink="/xmazPruebaDev">©2019 Xmaz</span> <br>
+            <span style="color: white" class="text-center footerHorario cursorP" routerLink="/xmazAvisoPrivacidad" onclick="subir()">Aviso de privacidad</span>
+        </div>
+
+        <div class="col-sm-3 text-center marginfooter textoFooter">
+            <a href="tel:{{location.phoneNumber}}"> <span style="color: white"><i class="fa fa-phone footerFa" aria-hidden="true"></i>{{location.phoneNumber}}</span> </a>
+        </div>
+
+        <div class="col-sm-2 text-center marginfooter textoFooter">
+            <a [href]="mailText"> <span style="color: white"><i class="fa fa-envelope-o footerFa" aria-hidden="true"></i>contacto@xmaz.mx</span> </a>
+        </div>
+
+        <div class="col-sm-2 text-center marginfooter text-center">
+            <h1 class="tituloFooterSocial textoFooter">Siguenos en:</h1>
+            <ul class="ulFooter">
+                <li>
+                    <a href="https://www.facebook.com/xmazsystems/" target="_blank"> <i class="fa fa-facebook footerIconosSocial" aria-hidden="true"></i> </a>
+                </li>
+                <li>
+                    <a href="https://www.facebook.com/xmazsystems/" target="_blank"> <i class="fa fa-youtube-play footerIconosSocial" aria-hidden="true"></i> </a>
+                </li>
+                <li>
+                    <a href="https://www.instagram.com/xmaztechnology/?hl=es-la" target="_blank"> <i class="fa fa-instagram footerIconosSocial" aria-hidden="true"></i> </a>
+                </li>
+
+                <li>
+                    <a href="https://twitter.com/TechnologyXmaz" target="_blank"> <i class="fa fa-twitter footerIconosSocial" aria-hidden="true"></i> </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+        <br>
+    </div>
+
+    <br><br>
+</div>

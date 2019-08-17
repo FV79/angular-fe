@@ -1,0 +1,143 @@
+<div class="fondoB">
+    <aw-wizard>
+
+        <aw-wizard-step stepTitle="Datos generales" style="height: 600px;">
+            <div class="container">
+                <form action="">
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label class="control-label">Nombre de la empresa</label>
+                            <input maxlength="100" type="text" required="required" class="inputCliente" placeholder="Ingrese el nombre(s) " />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Direccion</label>
+                            <input maxlength="50" type="text" required="required" class="inputCliente" placeholder="Ingrese la direcció" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Num int</label>
+                            <input maxlength="5" type="text" required="required" class="inputCliente" placeholder="Ingrese el numero interior" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Num Ext</label>
+                            <input maxlength="5" type="text" class="inputCliente" placeholder="Ingrese el numero exterior" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Colonia</label>
+                            <input maxlength="30" type="text" required="required" class="inputCliente" placeholder="Ingrese la colonia" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">País</label>
+                            <input maxlength="30" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrese el País" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Estado</label>
+                            <select id="inputState " class="inputCliente " class="inputCliente" required>
+                                  <option value="">Seleccione un Estado</option>
+                                  <option *ngFor="let estado of listaEstado" [value]="estado">{{estado}}</option>
+                              </select>
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Municipio</label>
+                            <input maxlength="30" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrese el municipio" />
+                        </div>
+
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Localidad</label>
+                            <input maxlength="30" type="text" value="Mazatlán" required="required" class="inputCliente" placeholder="Ingrece la localidad" />
+                        </div>
+
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Codigo postal</label>
+                            <input maxlength="5" minlength="5" type="number" value="Sinaloa" required="required" class="inputCliente" placeholder="Ingrese el codigo postal" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">RFC</label>
+                            <input maxlength="13" minlength="12" type="text" required="required" class="inputCliente" placeholder="Ingrese el RFC" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Correo contacto</label>
+                            <input maxlength="30" type="email" required="required" class="inputCliente" placeholder="Ingrese el correo electronico" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" />
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label class="control-label">Telefono</label>
+                            <input maxlength="10" minlength="10" type="tel" class="inputCliente" placeholder="Ingrese el telefono" pattern="[0-9]{10}" />
+                        </div>
+
+                        <div id="fileuploader-container">
+                            <dx-file-uploader [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [maxFileSize]="4000000" selectButtonText="Seleccionar Icono" labelText="" accept="image/*" uploadMode="useForm" [maxFileSize]="4000000">></dx-file-uploader>
+                        </div>
+
+                        <div>
+                            <input type="file" id="file" onchange="return fileValidation()" />
+
+                            <div id="imagePreview" style="width: 15px; height: 15px;"></div>
+                        </div>
+
+
+                    </div>
+                </form>
+            </div>
+            <div class="centrado tcenter">
+                <button type="button" class="btn btn-success" awNextStep>Siguiente</button>
+            </div>
+        </aw-wizard-step>
+
+        <aw-wizard-step stepTitle="Certificados" awOptionalStep style="height: 600px;">
+            <div class="container">
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="fileuploader-container">
+                                <dx-file-uploader [allowedFileExtensions]="['.cer']" [maxFileSize]="4000000" selectButtonText="Seleccionar certificado" labelText="" accept="file/*" uploadMode="useForm" [maxFileSize]="4000000">>
+                                </dx-file-uploader>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div id="fileuploader-container">
+                                <dx-file-uploader [allowedFileExtensions]="['.key']" [maxFileSize]="4000000" selectButtonText="Seleccionar llave" labelText="" accept="file/*" uploadMode="useForm" [maxFileSize]="4000000">>
+                                </dx-file-uploader>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="control-label">Password llave privada</label>
+                            <input minlength="6" type="password" class="inputCliente" placeholder="Ingrese la contrasella de llave privada" />
+                        </div>
+                        <div class="col-md-6">
+                            <div id="fileuploader-container">
+                                <dx-file-uploader [allowedFileExtensions]="['.jpg', '.jpeg', '.png']" [maxFileSize]="4000000" selectButtonText="Seleccionar la ruta de xml" accept="image/*" uploadMode="useForm" [maxFileSize]="4000000">>
+                                </dx-file-uploader>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <label for="control-label">Licencia del producto</label>
+                            <textarea name="" id="" cols="0" rows="0" style="width: 100%"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="centrado tcenter">
+                <button type="button" class="btn btn-danger" awPreviousStep>Anterior</button>
+                <button type="button" class="btn btn-success" awNextStep>Siguiente</button>
+            </div>
+        </aw-wizard-step>
+
+        <aw-wizard-step stepTitle="Guardar" style="height: 600px;">
+            <div class="container centrado">
+                <ul style="display: flex; list-style: none;">
+                    <li> <button class="botonesSpan"><span> <i class="fa fa-floppy-o" aria-hidden="true"></i> </span></button> </li>
+                    <li> <button class="botonesSpan"><span> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> </span></button> </li>
+                    <li> <button class="botonesSpan"><span> <i class="fa fa-eraser" aria-hidden="true"></i> </span></button> </li>
+                </ul>
+            </div>
+            <div class="centrado tcenter">
+                <button type="button" class="btn btn-danger" awPreviousStep>Anterior</button>
+                <button type="button" class="btn btn-success" awNextStep>Siguiente</button>
+            </div>
+        </aw-wizard-step>
+
+    </aw-wizard>
+</div>

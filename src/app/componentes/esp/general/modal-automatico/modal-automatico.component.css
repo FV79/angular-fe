@@ -1,0 +1,23 @@
+.modalAutoTitulo {
+    color: #2274a2;
+    font-weight: bold;
+    display: block;
+    margin-left: auto;
+}
+
+.modalAutoSpan {
+    text-align: center;
+    display: block;
+    padding-bottom: 10px;
+    font-weight: bold;
+    font-size: 1.3rem;
+    color: black;
+}
+
+.modalAutoParrafo {
+    font-weight: 400;
+    text-align: justify;
+    padding-right: 5%;
+    padding-left: 5%;
+    color: black;
+}

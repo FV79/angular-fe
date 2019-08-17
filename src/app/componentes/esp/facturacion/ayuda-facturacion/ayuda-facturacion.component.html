@@ -1,0 +1,147 @@
+<div>
+    <dx-tab-panel #tabPanel [height]="" [dataSource]="pestanasAyuda" [selectedIndex]="0" [loop]="true" [animationEnabled]="true" [swipeEnabled]="true">
+        <div *dxTemplate="let pestana of 'title'">
+            <span>{{pestana.nombrePestanaAyuda}}</span>
+        </div>
+        <div *dxTemplate="let pestana of 'item'">
+            <div style="height:auto">
+
+                <div *ngIf="pestana.nombrePestanaAyuda == 'Videos Youtube'">
+                    <div class="pLados">
+                        <h1 class="ayudaTituloGral">Tutoriales</h1>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-users" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Dar de alta a un cliente</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-users" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Modificar a un cliente</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-users" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Consultar a un cliente</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-users" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Llamar a un cliente</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-building" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de empresa</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-building" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de empresa</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-building" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de empresa</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-building" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de empresa</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-file" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de facturar</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-file" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de facturar</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-file" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de facturar</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-file" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de facturar</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-briefcase" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de Prodcutos</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-briefcase" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de Prodcutos</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-briefcase" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de Prodcutos</h4>
+                            </div>
+
+                            <div class="col-md-3 col-sm-3 col-xl-3 col-lg-3">
+                                <span data-toggle="modal" data-target="#modalTutotial" class="ayudaIcono"> <i class="fa fa-briefcase" aria-hidden="true"></i> </span>
+                                <h4 data-toggle="modal" data-target="#modalTutotial" class="ayudaTitulo">Tutorial de Prodcutos</h4>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="pestana.nombrePestanaAyuda == 'Manual PDF'">
+                    <div class="pLados">
+                        <div class="row paddingBoto50">
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <span class="ayudaIconPdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>
+                                <h1 class="ayudaIconTitulo"> <a href="http://xmaz.mx/assets/manual/manual.pdf" download="Manual"> Ver </a> </h1>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xl-6 col-lg-6">
+                                <span class="ayudaIconPdf"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></span>
+                                <h1 class="ayudaIconTitulo"> <a href="http://xmaz.mx/assets/manual/manual.pdf" download target="_blank"> Descargar </a> </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </dx-tab-panel>
+    <div class="item-box">
+        Ayuda <span>{{tabPanel.selectedIndex + 1}}</span> de <span>{{pestanasAyuda.length}}</span>
+    </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalTutotial" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Ayuda</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <h3 class="ayudaTituloModal">Clientes</h3>
+                    <div>
+                        <iframe src="https://www.youtube.com/embed/fJ9rUzIMcZQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" width="100%" height="500px" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

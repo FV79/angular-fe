@@ -1,0 +1,101 @@
+<div class="row">
+    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-6 fondoAnaranjado">
+        <div class="conterDashboard">
+            <ngx-counter countValue=0 limit=0 speed="100" size="large" color="#2274a2" bgcolor="#fff"></ngx-counter>
+        </div>
+        <h4 class="tituloDashboard">Folios timbrados</h4>
+    </div>
+    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-6 fondoAqua">
+        <div class="conterDashboard">
+            <ngx-counter countValue=0 limit={{gratis}} speed="100" size="large" color="#2274a2" bgcolor="#fff"></ngx-counter>
+        </div>
+        <h4 class="tituloDashboard">Folios disponibles</h4>
+    </div>
+    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-6 fondoRojo">
+        <div class="conterDashboard">
+            <ngx-counter countValue=0 limit={{cuenta}} speed="100" size="large" color="#2274a2" bgcolor="#fff"></ngx-counter>
+        </div>
+        <h4 class="tituloDashboard">Productos registrados</h4>
+    </div>
+    <div class="col-md-3 col-xl-3 col-sm-3 col-lg-6 fondoVerde">
+        <div class="conterDashboard">
+            <ngx-counter countValue=0 limit={{cuenta}} speed="100" size="large" color="#2274a2" bgcolor="#fff"></ngx-counter>
+        </div>
+        <h4 class="tituloDashboard">Pre-facturas</h4>
+    </div>
+</div>
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <div>
+                <h1 class="tituloDentro">Ventas del mes</h1>
+                <dx-chart id="chart" [dataSource]="dataSource">
+                    <dxi-series argumentField="day" valueField="timbres" name="Timbres Gastados" type="bar" color="#0E7691">
+                    </dxi-series>
+
+                    <dxo-common-series-settings argumentField="state" type="bar" hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" [format]="{
+                                            type: 'fixedPoint',
+                                            precision: '0'
+                                        }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+
+                    <dxo-export [enabled]="true"></dxo-export>
+
+                </dx-chart>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div>
+                <h1 class="tituloDentro">Timbrado diario</h1>
+                <dx-chart id="chart" [dataSource]="dataSource">
+                    <dxi-series argumentField="day" valueField="timbres" name="Timbres Gastados" type="bar" color="#2274a2">
+                    </dxi-series>
+
+                    <dxo-common-series-settings argumentField="state" type="bar" hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" [format]="{
+                                            type: 'fixedPoint',
+                                            precision: '0'
+                                        }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+
+                    <dxo-export [enabled]="true"></dxo-export>
+
+                </dx-chart>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="table-responsive paddingBoto100" style="height:300px;overflow-y: scroll;">
+    <h1 class="tituloFacturas">Facturas</h1>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Cliente</th>
+                <th>CP</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let factura of factura">
+                <td scope="row"></td>
+                <td> {{factura.fac_cliente_nombre}} </td>
+                <td> {{factura.fac_cliente_RFC}} </td>
+                <td> {{factura.fac_oper_total}} </td>
+                <td> {{factura.fac_conf_status}} </td>
+                <td>
+                    <button class="btn btn-outline-info"> Ver </button>
+                    <button class="btn btn-outline-primary" style="margin-left: 20px"> Facturar </button>
+                    <button class="btn btn-outline-danger" style="margin-left: 20px"> Cancelar </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

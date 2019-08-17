@@ -1,0 +1,348 @@
+<div class="fondoB">
+    <dx-tab-panel #tabPanel [height]="" [dataSource]="pestanasCliente" [selectedIndex]="0" [loop]="false" [animationEnabled]="true" [swipeEnabled]="true">
+        <div *dxTemplate="let pestana of 'title'">
+            <span>{{pestana.nombrePestanaCliente}}</span>
+        </div>
+        <div *dxTemplate="let pestana of 'item'">
+            <div style="height:auto">
+
+                <div *ngIf="pestana.nombrePestanaCliente == 'Consulta Cliente'">
+                    <h1 class="tituloDentro">Clientes</h1>
+                    <div class="container paddingBoto50">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>RFC</th>
+                                    <th>Codigo Postal</th>
+                                    <th>Direccion</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let cliente of clientes['clientes']">
+                                    <td>{{cliente.cli_nombre}}</td>
+                                    <td>{{cliente.cli_rfc}}</td>
+                                    <td>{{cliente.cli_cp}}</td>
+                                    <td>{{cliente.cli_direccion}}</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <div *ngIf="pestana.nombrePestanaCliente == 'Alta y modificacion Cliente'">
+                    <div>
+
+                        <h1 class="tituloDentro">Clientes</h1>
+                        <form (ngSubmit)="agregarCliente()" #forma="ngForm">
+                            <div class="container">
+
+                                <div class="row">
+
+                                    <div [formGroup]="grupoCliente" class="col-md-12">
+                                        <label for="cli_nombre" class="labelCliente">Nombre Completo <span class="campoRequerido"  *ngIf="grupoCliente.controls['cli_nombre'].errors?.required">*</span> </label>
+                                        <input formControlName="cli_nombre" [ngModel]="cliente.cli_nombre | uppercase" name="cliente.cli_nombre" (ngModelChange)="cliente.cli_nombre=$event" type="text" placeholder=" Ingresa el nombre(s) del cliente" class="inputCliente">
+                                    </div>
+
+                                    <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_nombre'].errors?.maxlength ">
+                                        Debe de tener menos de 50 letras
+                                    </div>
+                                    <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_nombre'].errors?.minlength">
+                                        Debe de tener al menos 5 letras
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row ">
+                                    <div [formGroup]="grupoCliente" class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                                        <label for="cli_estado" class="labelCliente">País<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_pais'].error?.required">*</span> </label>
+                                        <input formControlName="cli_pais" type="text " [(ngModel)]="cliente.cli_pais" name="cli_cli_pais" placeholder="Ingresa el pais" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_pais'].errors?.maxlength ">
+                                            Debe de tener menos de 30 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_pais'].errors?.minlength">
+                                            Debe de tener al menos 4 letras
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                                        <label for="inputState " class="labelCliente ">Estado<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_estado'].errors?.required">*</span> </label>
+                                        <select formControlName="cli_estado" id="inputState" class="form-control" class="inputCliente" [(ngModel)]="cliente.cli_estado" name="estado" required>
+                                            <option value="">Seleccione un Estado<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_estado'].errors?.required">*</span> </option>
+                                            <option *ngFor="let estado of listaEstado" [value]="estado">{{estado}}</option>
+
+                                            <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_estado'].errors?.maxlength ">
+                                                Debe de tener menos de 30 letras
+                                            </div>
+                                            <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_estado'].errors?.minlength">
+                                                Debe de tener al menos 4 letras
+                                            </div>
+                                        </select>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                                        <label for="cli_ciudad " class="labelCliente">Ciudad<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_ciudad'].errors?.required">*</span> </label>
+                                        <input formControlName="cli_ciudad" type="text" [(ngModel)]="cliente.cli_ciudad" name="cli_ciudad" placeholder="Ingresa la ciudad" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_ciudad'].errors?.maxlength ">
+                                            Debe de tener menos de 30 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_ciudad'].errors?.minlength">
+                                            Debe de tener al menos 4 letras
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-3 col-xl-3 col-sm-3 col-lg-3 ">
+                                        <label for="cli_localidad " class="labelCliente">Localidad<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_localidad'].errors?.required">*</span></label>
+                                        <input formControlName="cli_localidad" type="text" [(ngModel)]="cliente.cli_localidad" name="cli_localidad" placeholder="Ingresa la localidad  " class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_localidad'].errors?.maxlength ">
+                                            Debe de tener menos de 30 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_localidad'].errors?.minlength">
+                                            Debe de tener al menos 4 letras
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_direccion " class="labelCliente">Dirección<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_direccion'].errors?.required">*</span></label>
+                                        <input formControlName="cli_direccion" type="text" [(ngModel)]="cliente.cli_direccion" name="cli_direccion" placeholder="Ingresa la direccion" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_direccion'].errors?.maxlength ">
+                                            Debe de tener menos de 50 caracteres
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_direccion'].errors?.minlength">
+                                            Debe de tener al menos 4 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_numExt " class="labelCliente">No. Ext</label>
+                                        <input formControlName="cli_numExt" type="text" [(ngModel)]="cliente.cli_numExt" name="cli_numExt" placeholder="Ingresa el numero exterior " class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_numExt'].errors?.maxlength ">
+                                            Debe de tener menos de 6 caracteres
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_numExt'].errors?.minlength">
+                                            Debe de tener al menos 1 caracteres
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_numInt " class="labelCliente">No. int<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_numInt'].errors?.required">*</span></label>
+                                        <input formControlName="cli_numInt" type="text" [(ngModel)]="cliente.cli_numInt" name="cli_numInt" placeholder="Ingresa el numero interior" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_numInt'].errors?.maxlength ">
+                                            Debe de tener menos de 6 caracteres
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_numInt'].errors?.minlength">
+                                            Debe de tener al menos 1 caracteres
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row ">
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_cp " class="labelCliente">Codigo Postal<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_cp'].errors?.required">*</span></label>
+                                        <input (keypress)="solonumeros($event)" formControlName="cli_cp" type="number" [(ngModel)]="cliente.cli_cp" name="cli_cp" placeholder="Ingresa el codigo postal" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_cp'].errors?.maxlength ">
+                                            Debe de tener menos de 5 numeros
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_cp'].errors?.minlength">
+                                            Debe de tener al menos 5 numeros
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_colonia " class="labelCliente">Colonia<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_colonia'].errors?.required">*</span></label>
+                                        <input formControlName="cli_colonia" type="text" [(ngModel)]="cliente.cli_colonia" name="cli_colonia " placeholder="Ingresa la colonia" class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_colonia'].errors?.maxlength ">
+                                            Debe de tener menos de 30 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_colonia'].errors?.minlength">
+                                            Debe de tener al menos 3 letras
+                                        </div>
+                                    </div>
+
+                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                        <label for="cli_rfc " class="labelCliente">RFC<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_rfc'].errors?.required">*</span></label>
+                                        <input formControlName="cli_rfc" type="text" (keyup.enter)="seleccionarCliente()" [ngModel]="cliente.cli_rfc | uppercase" name="cli_rfc" (ngModelChange)="cliente.cli_rfc=$event" placeholder="Ingresa el RFC  " class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.maxlength ">
+                                            Debe de tener menos de 13 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.minlength">
+                                            Debe de tener al menos 12 letras
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div [formGroup]="grupoCliente" class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                                        <label for="cli_telefono" class="labelCliente">Telefono</label>
+                                        <input (keypress)="solonumeros($event)" formControlName="cli_telefono" type="tel" [(ngModel)]="cliente.cli_telefono" name="cli_telefono " placeholder="Ingresa el telefono" class="inputCliente" pattern="[0-9]{10}">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_telefono'].errors?.maxlength ">
+                                            Debe de tener menos de 10 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_telefono'].errors?.minlength">
+                                            Debe de tener al menos 10 letras
+                                        </div>
+                                    </div>
+                                    <div [formGroup]="grupoCliente" class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
+                                        <label for="cli_email" class="labelCliente">Correo electronico<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_rfc'].errors?.required">*</span></label>
+                                        <input formControlName="cli_email" type="text " [(ngModel)]="cliente.cli_email" name="cli_email " placeholder="Ingresa el email  " class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_email'].errors?.maxlength ">
+                                            Debe de tener menos de 35 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_email'].errors?.minlength">
+                                            Debe de tener al menos 5 letras
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {{grupoCliente.valid}}
+                                <div>
+                                    <div class="row ">
+
+                                        <!-- Agregar -->
+                                        <div [formGroup]="grupoCliente" *ngIf="grupoCliente.valid && opcion =='agregar' " class="col-md-3 " data-toggle="modal" data-target="#modalAgregar">
+                                            <button class="botonCliente" id="btnDes" type="button">
+                                                    <span class="iconoCliente"><i class="fa fa-floppy-o " aria-hidden="true "></i></span>
+                                                </button>
+                                        </div>
+                                        <div [formGroup]="grupoCliente" *ngIf="grupoCliente.invalid && opcion =='agregar' || grupoCliente.invalid &&  opcion !='agregar' || grupoCliente.valid &&  opcion !='agregar'  " class="col-md-3 ">
+                                            <button class="botonCliente" id="btnDes" type="button" disabled>
+                                                        <span class="iconoClienteDesa"><i class="fa fa-floppy-o " aria-hidden="true "></i></span>
+                                                    </button>
+                                        </div>
+
+                                        <!-- Modificar -->
+                                        <div *ngIf="opcion =='modificar' && grupoCliente.valid " class="col-md-3 " data-toggle="modal" data-target="#modalModificar">
+                                            <button type="button" class="botonCliente ">
+                                                <span class="iconoCliente"><i class="fa fa-pencil-square-o " aria-hidden="true "></i></span>
+                                            </button>
+                                        </div>
+                                        <div [formGroup]="grupoCliente" *ngIf="grupoCliente.invalid && opcion!='modificar' || grupoCliente.valid && opcion=='agregar' || grupoCliente.invalid && opcion =='modificar' " class="col-md-3 ">
+                                            <button (click)="modificarCliente()" type="button" class="botonCliente " disabled>
+                                                        <span class="iconoClienteDesa"><i class="fa fa-pencil-square-o " aria-hidden="true "></i></span>
+                                                    </button>
+                                        </div>
+
+                                        <!-- buscar -->
+                                        <div class="col-md-3" data-toggle="modal" data-target="#buscarCliente">
+                                            <button type="button" class="botonCliente ">
+                                                <span class="iconoCliente "><i class="fa fa-search " aria-hidden="true "></i></span>
+                                            </button>
+                                        </div>
+
+                                        <!-- Limpiar -->
+                                        <div class="col-md-3">
+                                            <button class="botonCliente" onclick="limpiarForm()" name="btnLimpiar" type="button" (click)="limpiar()">
+                                                <span class="iconoCliente "><i class="fa fa-eraser " aria-hidden="true "></i></span>
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dx-tab-panel>
+    <div class="item-box">
+        Item <span>{{tabPanel.selectedIndex + 1}}</span> of <span>{{pestanasCliente.length}}</span>
+    </div>
+
+</div>
+
+
+
+<!-- modal -->
+<div class="modal fade" id="buscarCliente" tabindex="-1" role="dialog" aria-labelledby="buscarCliente" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="buscarCliente">Clientes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nombre</th>
+                                <th>RFC</th>
+                                <th>CP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr (click)="TraerClienteClick(index)" onclick="$('#buscarCliente').modal('hide')" *ngFor="let cliente of httpClient ;let index = index">
+                                <td>{{cliente.cli_nombre}}</td>
+                                <td>{{cliente.cli_rfc}}</td>
+                                <td>{{cliente.cli_cp}}</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <p> {{cliente.cli_nombre}}</p>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modalAgregar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                     </button>
+            </div>
+            <div class="modal-body">
+                Deseas dar de alta al cliente
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                <button type="submit" (click)="agregarCliente()" class="btn btn-primary" data-dismiss="modal">Guardar Cliente</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalModificar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Agregar Cliente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                         </button>
+            </div>
+            <div class="modal-body">
+                Deseas modificar al cliente: {{cliente.cli_nombre}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">cerrar</button>
+                <button type="submit" (click)="modificarCliente()" class="btn btn-primary" data-dismiss="modal">Guardar Cliente</button>
+            </div>
+        </div>
+    </div>
+</div>

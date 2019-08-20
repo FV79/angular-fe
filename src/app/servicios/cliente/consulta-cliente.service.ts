@@ -10,9 +10,8 @@ export class ServiceConsultaCliente {
     }
     
    public getListaClientes() {
-    
       return new Promise((resolve,reject) => {
-        this.httpClient.get('http://200.92.88.27:3000/clientes',{
+        this.httpClient.get('http://localhost:3000/clientes',{
            responseType:'json',
            headers:{
              'token':window.localStorage.getItem('token')
@@ -24,14 +23,13 @@ export class ServiceConsultaCliente {
          reject(err);
        }))
       })
-    
     }
 
     public agregarCliente(nuevoCliente) {
       console.log('funcion servicio');
       // console.log('SERVICIO');
       return new Promise((resolve,reject) => {
-        this.httpClient.post('http://200.92.88.27:3000/clientes',{
+        this.httpClient.post('http://localhost:3000/clientes',{
           cliente:nuevoCliente})
         .subscribe((response => {
          resolve(response[0]);
@@ -43,7 +41,7 @@ export class ServiceConsultaCliente {
 
     public seleccionarCliente(RFC) {
       return new Promise((resolve,reject) => {
-        this.httpClient.post('http://200.92.88.27:3000/cliente',{RFC})
+        this.httpClient.post('http://localhost:3000/cliente',{RFC})
         .subscribe((cliente => {
           resolve(cliente)
         }),(err => {
@@ -55,7 +53,7 @@ export class ServiceConsultaCliente {
 
     public modificarCliente (cliente) {
       return new Promise((resolve,reject) => {
-        this.httpClient.put('http://200.92.88.27:3000/clientes',{cliente})
+        this.httpClient.put('http://localhost:3000/clientes',{cliente})
         .subscribe((clienteActualizado => {
           resolve(clienteActualizado);
         }),(err => {

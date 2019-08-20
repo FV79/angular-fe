@@ -10,7 +10,7 @@ export class RegimenFiscalService {
 
   traerRegimenFiscalSAT = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/regimenfiscalsat',{
+      this.httpClient.get('http://localhost:3000/regimenfiscalsat',{
         headers:{
           'token':window.localStorage.getItem('token')
         }

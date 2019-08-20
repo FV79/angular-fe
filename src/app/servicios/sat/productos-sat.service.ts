@@ -10,7 +10,7 @@ export class ProductosSatService {
 
   traerProductoSAT = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/productosat',{
+      this.httpClient.get('http://localhost:3000/productosat',{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -24,7 +24,7 @@ export class ProductosSatService {
   }
   traerProductoSATEmpresa = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/productosatEmpresa',{
+      this.httpClient.get('http://localhost:3000/productosatEmpresa',{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -39,7 +39,7 @@ export class ProductosSatService {
 
   insertarProductoSATEmpresa = async(producto) => {
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/productosatEmpresa',producto,{
+      this.httpClient.post('http://localhost:3000/productosatEmpresa',producto,{
         headers:{
           'token':window.localStorage.getItem('token')
         }

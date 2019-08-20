@@ -10,7 +10,7 @@ export class ProductosFacturacionServicioService {
 
  public traerArticulos() {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/articulos', {
+      this.httpClient.get('http://localhost:3000/articulos', {
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -25,7 +25,7 @@ export class ProductosFacturacionServicioService {
 
   public eliminarArticulo(id) {
     return new Promise((resolve,reject) => {
-      this.httpClient.delete(`http://200.92.88.27:3000/articulo/${id}`,{
+      this.httpClient.delete(`http://localhost:3000/articulo/${id}`,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -40,7 +40,7 @@ export class ProductosFacturacionServicioService {
 
   public activarArticulo(id) {
     return new Promise((resolve,reject) => {
-      this.httpClient.put(`http://200.92.88.27:3000/activarArticulo/${id}`,{token:window.localStorage.getItem('token')},{
+      this.httpClient.put(`http://localhost:3000/activarArticulo/${id}`,{token:window.localStorage.getItem('token')},{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -55,7 +55,7 @@ export class ProductosFacturacionServicioService {
 
   public agregarArticulo (articulo) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/articulo',articulo,{
+      this.httpClient.post('http://localhost:3000/articulo',articulo,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -66,14 +66,11 @@ export class ProductosFacturacionServicioService {
         reject(err)
       }))
     })
-
-    
-
   }
 
   public modificarArticulo (articulo) {
     return new Promise((resolve,reject) => {
-      this.httpClient.put('http://200.92.88.27:3000/articulo/'+ articulo.codArticulo,articulo,{
+      this.httpClient.put('http://localhost:3000/articulo/'+ articulo.codArticulo,articulo,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -86,9 +83,9 @@ export class ProductosFacturacionServicioService {
     })
   }
 
-  public seleccionararticuloClave(pro_clave) {
+  public seleccionararticuloClave(campo_clave_producto) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/productosClave',{pro_clave})
+      this.httpClient.post('http://localhost:3000/productosClave',{campo_clave_producto})
       .subscribe((producto => {
         resolve(producto)
       }),(err => {
@@ -97,5 +94,8 @@ export class ProductosFacturacionServicioService {
 
     })
   }
+
+  
+
 
 }

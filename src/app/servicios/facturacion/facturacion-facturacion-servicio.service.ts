@@ -11,7 +11,7 @@ export class FacturacionFacturacionServicioService {
 
 public hacerFactura = async(factura) => {
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/factura',factura,{
+      this.httpClient.post('http://localhost:3000/factura',factura,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -27,7 +27,7 @@ public hacerFactura = async(factura) => {
 
   public funcionPDF = async(opcion,folio,ext)=> {  
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/facturaPDF',{opcion,folio,ext}, {
+      this.httpClient.post('http://localhost:3000/facturaPDF',{opcion,folio,ext}, {
         headers:{
           'token':window.localStorage.getItem('token')
         },
@@ -47,7 +47,7 @@ public hacerFactura = async(factura) => {
 
   public funcionPDFEnviar = async(opcion,folio,correos)=> { 
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/facturaPDF',{opcion,folio,correos}, {
+      this.httpClient.post('http://localhost:3000/facturaPDF',{opcion,folio,correos}, {
         headers:{
           'token':window.localStorage.getItem('token')
         },
@@ -62,7 +62,7 @@ public hacerFactura = async(factura) => {
 
   public traerFacturas = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/facturaBuscar',{
+      this.httpClient.get('http://localhost:3000/facturaBuscar',{
         headers:{
           'token':window.localStorage.getItem('token')
         }

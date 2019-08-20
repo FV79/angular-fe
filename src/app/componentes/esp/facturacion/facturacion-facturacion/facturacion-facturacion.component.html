@@ -1,6 +1,7 @@
 <div class="fondoB">
     <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }"></ngx-loading>
     <h1 class="tituloDentro">Facturación</h1>
+    <button (click)="pruebass()">aqui</button>
     <div class="pLados">
         <form>
 
@@ -10,7 +11,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <button type="button" (click)="hacerFactura()" type="submit" class="btnFacturacion btn-labeledFac btn-azul">
+                                <button type="button" (click)="hacerFactura()" type="button" class="btnFacturacion btn-labeledFac btn-azul">
                                     <span class="btn-labelFacturacion"><i class="fa fa-file-text"></i></span>Facturar
                                 </button>
                                 <button type="button" (click)="limpiarCliente()" class="btnFacturacion btn-labeledFac btn-azul">
@@ -27,7 +28,7 @@
                             <div class="col-md-11">
                                 <div>
                                     <label for="" class="labelCliente">RFC</label>
-                                    <input [ngModel]="facturaDDL.fac_cliente_RFC | uppercase" name="fac_cliente_RFC" (ngModelChange)="facturaDDL.fac_cliente_RFC=$event" type="text" class="inputCliente" placeholder="Ingrese el RFC">
+                                    <input [ngModel]="facturaDDL.fac_cliente_RFC | uppercase" name="fac_cliente_RFC" (ngModelChange)="facturaDDL.fac_cliente_RFC=$event" type="text" class="inputCliente" placeholder="Ingrese el RFC" data-toggle="tooltip" data-placement="top" title="Tooltip on top">
                                 </div>
                             </div>
                             <div class="col-md-1">
@@ -61,7 +62,7 @@
                             <div class="col-md-6 col-xl-6 col-sm-6 col-lg-6">
                                 <label for="inputState" class="labelCliente ">Tipo de documento</label>
                                 <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_factura_tipodoc" name="fac_factura_tipodoc">
-                                    <option value="">Seleccione un documento</option>
+                                    <!-- <option value="">Seleccione un documento</option> -->
                                     <option  *ngFor="let documento of TipoDocumentos" value="{{documento.codigo}}"> {{documento.tipo}} </option>
                                 </select>
                             </div>
@@ -332,7 +333,6 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <app-loading *ngIf="loading"></app-loading>
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -374,7 +374,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <app-loading *ngIf="loading"></app-loading>
+                    <input type="text" placeholder="holas">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -489,3 +489,6 @@
 
     <!-- div Principal -->
 </div>
+
+
+<ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '10px' }"></ngx-loading>

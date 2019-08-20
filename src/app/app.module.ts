@@ -132,12 +132,13 @@ import { ProductosFactComponent } from './componentes/esp/facturacion/productos-
     ArchwizardModule,
     DxPieChartModule,
     TextMaskModule,
-    NgxLoadingModule.forRoot({      
+    NgxLoadingModule.forRoot({             
       backdropBackgroundColour: 'rgba(0,0,0,0.1)', 
       backdropBorderRadius: '4px',
       primaryColour: '#ffffff', 
       secondaryColour: '#ffffff', 
-      tertiaryColour: '#ffffff'
+      tertiaryColour: '#ffffff',
+      fullScreenBackdrop: true
   })
   ],
   providers: [

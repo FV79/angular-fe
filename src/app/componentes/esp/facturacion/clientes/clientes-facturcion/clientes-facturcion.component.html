@@ -40,6 +40,19 @@
                             <div class="container">
 
                                 <div class="row">
+                                    <div [formGroup]="grupoCliente" class="col-md-12 col-xl-12 col-sm-12 col-lg-12">
+                                        <label for="cli_rfc" class="labelCliente">RFC<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_rfc'].errors?.required">*</span></label>
+                                        <input formControlName="cli_rfc" type="text" (keyup.enter)="seleccionarCliente()" [ngModel]="cliente.cli_rfc | uppercase" name="cli_rfc" (ngModelChange)="cliente.cli_rfc=$event" placeholder="Ingresa el RFC  " class="inputCliente">
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.maxlength ">
+                                            Debe de tener menos de 13 letras
+                                        </div>
+                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.minlength">
+                                            Debe de tener al menos 12 letras
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
 
                                     <div [formGroup]="grupoCliente" class="col-md-12">
                                         <label for="cli_nombre" class="labelCliente">Nombre Completo <span class="campoRequerido"  *ngIf="grupoCliente.controls['cli_nombre'].errors?.required">*</span> </label>
@@ -143,7 +156,7 @@
                                 </div>
 
                                 <div class="row ">
-                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                    <div [formGroup]="grupoCliente" class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
                                         <label for="cli_cp " class="labelCliente">Codigo Postal<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_cp'].errors?.required">*</span></label>
                                         <input (keypress)="solonumeros($event)" formControlName="cli_cp" type="number" [(ngModel)]="cliente.cli_cp" name="cli_cp" placeholder="Ingresa el codigo postal" class="inputCliente">
                                         <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_cp'].errors?.maxlength ">
@@ -154,7 +167,7 @@
                                         </div>
                                     </div>
 
-                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
+                                    <div [formGroup]="grupoCliente" class="col-md-6 col-xl-6 col-sm-6 col-lg-6 ">
                                         <label for="cli_colonia " class="labelCliente">Colonia<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_colonia'].errors?.required">*</span></label>
                                         <input formControlName="cli_colonia" type="text" [(ngModel)]="cliente.cli_colonia" name="cli_colonia " placeholder="Ingresa la colonia" class="inputCliente">
                                         <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_colonia'].errors?.maxlength ">
@@ -165,16 +178,6 @@
                                         </div>
                                     </div>
 
-                                    <div [formGroup]="grupoCliente" class="col-md-4 col-xl-4 col-sm-4 col-lg-4 ">
-                                        <label for="cli_rfc " class="labelCliente">RFC<span class="campoRequerido" *ngIf="grupoCliente.controls['cli_rfc'].errors?.required">*</span></label>
-                                        <input formControlName="cli_rfc" type="text" (keyup.enter)="seleccionarCliente()" [ngModel]="cliente.cli_rfc | uppercase" name="cli_rfc" (ngModelChange)="cliente.cli_rfc=$event" placeholder="Ingresa el RFC  " class="inputCliente">
-                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.maxlength ">
-                                            Debe de tener menos de 13 letras
-                                        </div>
-                                        <div class="campoValidacion" *ngIf="grupoCliente.controls['cli_rfc'].errors?.minlength">
-                                            Debe de tener al menos 12 letras
-                                        </div>
-                                    </div>
                                 </div>
 
                                 <div class="row ">

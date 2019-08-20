@@ -118,10 +118,17 @@
                                 <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12">
                                     <h4>Seleccionar impuestos del producto</h4>
                                     <div class="form-check form-check-inline">
-                                        <input [(ngModel)]="producto2.pro_IVA" name="pro_IVA" class="form-check-input" type="checkbox" id="impuestoIVA" value="true">
-                                        <label class="form-check-label" for="impuestoIVA">I.V.A</label>
+                                        <!-- <input [(ngModel)]="producto2.pro_IVA" name="pro_IVA" class="form-check-input" type="checkbox" id="impuestoIVA" value="true">
+                                        <label class="form-check-label" for="impuestoIVA">I.V.A</label> -->
+                                        <input [(ngModel)]="imp_IVA" name="imp_IVA" class="form-check-input" type="checkbox" id="impuestoISH" value="option1">
+                                        <label class="form-check-label" for="impuestoISH">I.V.A</label>
+                                        <!-- <input *ngIf="imp_IVA" [(ngModel)]="producto2.pro_IVA" name="pro_IVA" class="inputCliente" type="text"> -->
+                                        <select *ngIf="imp_IVA" id="inputState" class="form-control" class="inputCliente" [(ngModel)]="producto2.pro_IVA" name="pro_IVA">
+                                            <option>Seleccionar la taza del I.V.A</option>
+                                            <option *ngFor="let tasa of tazaIVA" value="{{tasa.valor}}"> {{tasa.valor}} </option>
+                                        </select>
                                     </div>
-                                    <!-- <div class="form-check form-check-inline">
+                                    <div class="form-check form-check-inline">
                                         <input [(ngModel)]="producto2.pro_ISR" name="pro_ISR" class="form-check-input" type="checkbox" id="impuestoISR" value="true">
                                         <label class="form-check-label" for="impuestoISR">I.S.R</label>
                                     </div>
@@ -129,7 +136,7 @@
                                         <input [(ngModel)]="pro_ISH" name="pro_ISH" class="form-check-input" type="checkbox" id="impuestoISH" value="option3">
                                         <label class="form-check-label" for="impuestoISH">I.S.H</label>
                                         <input *ngIf="pro_ISH" [(ngModel)]="producto2.pro_ISH" name="pro_ISH" class="inputCliente" type="text">
-                                    </div> -->
+                                    </div>
                                 </div>
                             </div>
 

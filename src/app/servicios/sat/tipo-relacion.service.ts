@@ -10,7 +10,7 @@ export class TipoRelacionService {
 
   traerTipoRelacionSAT = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/tiporelacionsatxmaz',{
+      this.httpClient.get('http://localhost:3000/tiporelacionsatxmaz',{
         headers:{
           'token':window.localStorage.getItem('token')
         }

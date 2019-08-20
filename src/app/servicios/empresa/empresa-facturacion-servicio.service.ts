@@ -15,7 +15,7 @@ export class EmpresaFacturacionServicioService {
 
   public login(empresa) {
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/login',empresa)
+      this.httpClient.post('http://localhost:3000/login',empresa)
       .subscribe((empresaToken => {
         this.empresa = empresaToken["empresa"]
       resolve(empresaToken)
@@ -29,7 +29,7 @@ export class EmpresaFacturacionServicioService {
 
   public findEmpresaById(id) {
     return new Promise((resolve,reject) => {
-      this.httpClient.get(`http://200.92.88.27:3000/traerEmpresa/${id}`,{
+      this.httpClient.get(`http://localhost:3000/traerEmpresa/${id}`,{
         headers:{
           'token': window.localStorage.getItem('token')
         }
@@ -44,7 +44,6 @@ export class EmpresaFacturacionServicioService {
   }
 
   public getEmpresaLogin () {
-    
     return new Promise((resolve,reject) => {
        this.autentificacionService.validaToken()
        .then((empresa) => {
@@ -59,7 +58,7 @@ export class EmpresaFacturacionServicioService {
 
   public registro(empresa) {
   return new Promise((resolve,reject) => {
-    this.httpClient.post('http://200.92.88.27:3000/registrar',{empresa})
+    this.httpClient.post('http://localhost:3000/registrar',{empresa})
     .subscribe(res => {
       resolve(res);
     },(err => {
@@ -70,7 +69,7 @@ export class EmpresaFacturacionServicioService {
 
   public actualizar(empresa) {
     return new Promise((resolve,reject) => {
-      this.httpClient.put('http://200.92.88.27:3000/empresa',empresa,{
+      this.httpClient.put('http://localhost:3000/empresa',empresa,{
         headers:{
           'token':window.localStorage.getItem('token'),
           // 'Content-Type': 'multipart/form-data'

@@ -56,7 +56,6 @@ export class FacturacionFacturacionComponent implements OnInit {
     metodoPagoNombre: "PAGO EN PARCIALIDADES O DIFERIDO"
   }]
 
-  loading: boolean;
   precio_sin_iva: number;
   arreglo = new Array();
 
@@ -74,13 +73,13 @@ export class FacturacionFacturacionComponent implements OnInit {
   //tipo relacion
   tipoRelacion = new TipoRelacion('','','');
   //factura ddl
-  facturaDDL = new Factura2('','','','','',0,String((new Date().getDate())).padStart(2,'0')+'/'+ String(new Date().getMonth()+1).padStart(2,'0') + '/' + new Date().getFullYear(),'','','','','','',0,0,'',0,0,0,0,0,0,'','','','','','','','','','','','','','',1,0,0,0,0,0,0,0,0,true,false,0,0,0,0,0);
+  facturaDDL = new Factura2('','','','','',0,String((new Date().getDate())).padStart(2,'0')+'/'+ String(new Date().getMonth()+1).padStart(2,'0') + '/' + new Date().getFullYear(),'','','','','','',0,0,'',0,0,0,0,0,0,'','','','','','','','','','','','','','',1,0,0,0,0,0,0,0,0,true,false,0,0,0,0,0,0);
   //detalle producto
   detalleProducto = new Array();
-nombrePDF:string = '';
-correoFactura:any ={correo:'',cc:''};
-correosFactura = new Array();
-
+  nombrePDF:string = '';
+  correoFactura:any ={correo:'',cc:''};
+  correosFactura = new Array();
+  loading: boolean;
 
   constructor(private facturacionFacturacionServicioService:FacturacionFacturacionServicioService,
     private serviceConsultaCliente:ServiceConsultaCliente,
@@ -95,20 +94,20 @@ correosFactura = new Array();
     this.traerUsoCFDI();
     this.traerFormaPago();
     this.traerTipoRelacion();
-    this.traerMedidasSat();
-
+    this.traerMedidasSat();    
   }
 
   ngOnInit() {
     if (this.facturaDDL.fac_factura_tipodoc == 0) {
             $("#notaCredito").hide();      
-          } 
+          }                   
 
+    this.facturaDDL.fac_factura_tipodoc = 0;
   }
 
 //Traer articulos
   traerArticuloClick = async(index)=> {
-    this.facturaDDL.fac_pro_idprodcto_interna = this.producto[index].codArticulo;
+    this.facturaDDL.fac_pro_idprodcto_interna = this.producto[index].pro_clave;
     this.facturaDDL.fac_pro_claveprod_sat = this.producto[index].pro_clave_sat;
     this.facturaDDL.fac_pro_nombre = this.producto[index].pro_nombre;
     this.facturaDDL.fac_pro_unidadmedida_codigo_sat = this.producto[index].pro_unidad_medida;
@@ -293,6 +292,7 @@ correosFactura = new Array();
 
   //Realizar Factura
     hacerFactura = async () => {
+      this.loading = true;
     if(!(this.facturaDDL.ivaProductoCheck && this.facturaDDL.isrProductoCheck)) {
       this.facturaDDL.ivaProductoCheck = true;
     }
@@ -329,63 +329,63 @@ correosFactura = new Array();
       let facturaExito = await this.facturacionFacturacionServicioService.hacerFactura(factura)
       console.log('Factura realizada con exito',facturaExito);
       this.nombrePDF = facturaExito["folio"];
-      this.productoAgregado.length = 0;
-      this.loading = false;    
+      this.productoAgregado.length = 0;      
+      this.loading = false;
       this.toast.successToastr('Exito','Factura Realizada con exito');      
       $("#modalFacturaD").modal();      
-    } catch (error) {
-      this.loading = false;
+    } catch (error) {     
+      this.loading = false; 
       console.log('Error no se hizo la factura',error);      
     }
   }
 
     //Descargar PDF
     funcionDescargarPDF = async() => {
+      this.loading = true;
       try {
         let ext = ['pdf','xml'];
       for(let x = 0; x < ext.length;x++) {
         let pdf = await this.facturacionFacturacionServicioService.funcionPDF('descargar',this.nombrePDF,ext[x]);
         saveAs(pdf,'07523eb1-28fe-45a5-bf58-eb2f69eb49b3');
-        this.loading = false;
+        this.loading = false;        
         console.log('PDF descargado',pdf)
         this.toast.successToastr('Exito','Se ha descargado tu factura');        
         }
       } catch (error) {
-        this.toast.errorToastr('Error','Error al descargar factura')
         this.loading = false;
+        this.toast.errorToastr('Error','Error al descargar factura')        
         console.log('Error al descargar PDF',error);
       }
     }
 
     //Enviar PDF
     funcionEnviarPDF = async () => {
+      this.loading = true;
       try {
         let enviarZip = await this.facturacionFacturacionServicioService.funcionPDFEnviar('enviar', this.nombrePDF,{correos:this.correosFactura,cc:this.correoFactura.cc});
-        console.log('Enviar PDF',enviarZip);
         this.loading = false;
+        console.log('Enviar PDF',enviarZip);        
         this.toast.successToastr('Exito','Se envio su factura');
-      } catch (error) {
-        this.loading = false;
+      } catch (error) {     
+        this.loading = false;   
         this.toast.errorToastr('Error','Algo salio mal intentelo de neuvo');
         console.log('Error al enviar PDF',error)
       }
     }
 
     //Agregar correo
-    agregarCorreoFactura= async() => {
+    agregarCorreoFactura= async() => {      
     if(this.correoFactura.correo != '' ) {
-      if(this.correosFactura.length == 0) {
+      if(this.correosFactura.length == 0) {        
         this.correosFactura.push({correo:this.correoFactura.correo});
         this.correoFactura.correo = '';
       }else {
         for(let x = 0; x < this.correosFactura.length;x++) {
-            if(this.correosFactura[x].correo == this.correoFactura.correo){
-              this.loading = false;
+            if(this.correosFactura[x].correo == this.correoFactura.correo){              
               break;              
             }  
             if(x == this.correosFactura.length-1) {
-              this.correosFactura.push({correo:this.correoFactura.correo});
-              this.loading = false;
+              this.correosFactura.push({correo:this.correoFactura.correo});              
             }
           }
         this.correoFactura.correo = '';
@@ -402,22 +402,27 @@ correosFactura = new Array();
  
     //GET Medidas SAT
     traerMedidasSat = async () => {
+      this.loading = true;
       try {
         this.unidades = await this.unidadmedidadService.traerMedidasSAT();
         this.unidades = this.unidades["_unidadesMedidaSAT"];      
+        this.loading = false;
       } catch (error) {
+        this.loading = false;
         console.log('Error Unidades Medida SAT',error);
       }
     }
   
     //GET Articulos
     traerArticulos = async () => {
+      this.loading = true;
       try {
         let producto = await this.productosFacturacionServicioService.traerArticulos();
         this.producto = producto["articulos"];
-        console.log('Get Productos',this.producto);
         this.loading = false;
+        console.log('Get Productos',this.producto);        
       } catch (error) {
+        this.loading = false;
         console.log('Error Articulos',error);
       }
      }
@@ -456,8 +461,7 @@ correosFactura = new Array();
       try{
         let _usocfdisat = await this._usoCfdiService.traerUcfiSAT();
         this.usoCFDI = _usocfdisat["_usoCFDISAT"];
-        console.log('Get CFDI', this.usoCFDI);
-        this.loading = false;
+        console.log('Get CFDI', this.usoCFDI);        
       } catch (error) {
         console.log('Error CFDI',error);
       }
@@ -512,22 +516,22 @@ correosFactura = new Array();
   }
   
   //productosFacturacionServicioService
-  seleccionarProductoClave () {
+  /*seleccionarProductoClave () {
     this.productosFacturacionServicioService.seleccionararticuloClave(this.producto.pro_clave)    
     .then((producto:any) => {
       console.log(producto.result[0]);
-      this.producto.pro_nombre = producto.result[0].pro_nombre;
-      this.producto.pro_unidad_medida = producto.result[0].pro_unidad_medida;        
-      this.producto.pro_precio = producto.result[0].pro_precio; 
-      this.producto.pro_descuento = producto.result[0].pro_descuento; 
-      
+      this.facturaDDL.fac_pro_nombre = producto.result[0].pro_nombre;
+      this.facturaDDL.fac_pro_unidadmedida_nombre_sat = producto.result[0].pro_unidad_medida;        
+      this.facturaDDL.fac_pro_precio = producto.result[0].pro_precio; 
+      this.facturaDDL.fac_pro_descuento = producto.result[0].pro_descuento; 
+      // facturaDDL.fac_pro_idprodcto_interna
       this.toast.successToastr('Exito','Se encontro');
     })
     .catch((err) => {
-      console.log(err);
+      console.log('Error al traer pro_clavee',err);
       this.toast.errorToastr('Error','No existe');
     })
-  }
+  }*/
 
 
 
@@ -663,7 +667,8 @@ class Factura2{
     public fac_pro_iva_producto: number,
     public fac_aux_sub_noIva,
     public fac_aux_sub_siIVa,
-    public fac_precio_sin_iva
+    public fac_precio_sin_iva,
+    public fac_pro_IVA_tasa
   ){}
 }
 

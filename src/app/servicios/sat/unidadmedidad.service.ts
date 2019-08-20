@@ -11,7 +11,7 @@ export class UnidadmedidadService {
 
   traerMedidasSAT = async ()=> { 
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/unidadmedidasat',{
+      this.httpClient.get('http://localhost:3000/unidadmedidasat',{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -26,7 +26,7 @@ export class UnidadmedidadService {
   
   traerMedidasSATEmpresa = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/medidasEmpresa',{
+      this.httpClient.get('http://localhost:3000/medidasEmpresa',{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -42,7 +42,7 @@ export class UnidadmedidadService {
   insertarMedidaSatEmpresa = async (medida) => {
 
     return new Promise((resolve,reject) => {
-      this.httpClient.post('http://200.92.88.27:3000/medidasEmpresa',medida,{
+      this.httpClient.post('http://localhost:3000/medidasEmpresa',medida,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -58,7 +58,7 @@ export class UnidadmedidadService {
   
   traerMedidasSatID = async (id)=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/unidadmedidasat/' + id,{
+      this.httpClient.get('http://localhost:3000/unidadmedidasat/' + id,{
         headers:{
           'token':window.localStorage.getItem('token')
         }
@@ -72,7 +72,7 @@ export class UnidadmedidadService {
   }
   traerMedidasSatCodigo = async (cod)=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/unidadmedidasatCod/' + cod,{
+      this.httpClient.get('http://localhost:3000/unidadmedidasatCod/' + cod,{
         headers:{
           'token':window.localStorage.getItem('token')
         }

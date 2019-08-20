@@ -29,15 +29,13 @@ grupoLogin: FormGroup;
   }
   
 
- 
-
   login() {
     this.loading = true;
     let empresa = this.empresaLogin;
     this.empresaFacturacionServicioService.login(empresa)
     .then((empresaToken:any) => {
       this.loading = false;
-    window.localStorage.setItem('token',empresaToken.token);
+    window.localStorage.setItem('token',empresaToken.token);    
     this.toastr.successToastr('Bienvenido', 'Exito');
     this.router.navigate(['/XmazAdmin'])
     })

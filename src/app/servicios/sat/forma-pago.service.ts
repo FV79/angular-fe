@@ -10,7 +10,7 @@ export class FormaPagoService {
 
   traerFormaPagoSAT = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/formapagosat',{
+      this.httpClient.get('http://localhost:3000/formapagosat',{
         headers:{
           'token':window.localStorage.getItem('token')
         }

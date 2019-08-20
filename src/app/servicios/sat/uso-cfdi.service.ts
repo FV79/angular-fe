@@ -10,7 +10,7 @@ export class UsoCfdiService {
 
   traerUcfiSAT = async ()=> {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/usocfdisat',{
+      this.httpClient.get('http://localhost:3000/usocfdisat',{
         headers:{
           'token':window.localStorage.getItem('token')
         }

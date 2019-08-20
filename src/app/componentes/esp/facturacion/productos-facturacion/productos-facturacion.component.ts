@@ -33,6 +33,8 @@ export class ProductosFacturacionComponent implements OnInit {
 
 
 pro_ISH:boolean;
+imp_IVA:boolean;
+
 producto2 = new Producto2('','','',0,0,0,'',0,0,0,0,null,'')
 productoModificar = new Producto2('','','',0,0,0,'',0,0,0,0,null,'');
 _unidadMedida:any = new unidadMedida('','','');
@@ -67,6 +69,14 @@ paginaActualEmpresa:any = 1;
 numPaginasEmpresa:any  = [];
 filtroUMSEmpresa:string = '';
 
+//Tazas de IVA
+tazaIVA = [{
+  valor: 0.8,
+  descripcion: "8%"
+},{
+  valor: 0.16,
+  descripcion: "16%"
+}];
 
 //catalogos de producto
 catProductoSAT = new catProductoSAT('','','');
@@ -97,30 +107,30 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
   }]
 
 
+
   constructor(public toastr: ToastrManager,
-    private empresaFacturacionServicioService:EmpresaFacturacionServicioService,
-    private productosFacturacionServicioService:ProductosFacturacionServicioService,
-    private _tablasSatService:TablasSatService,
-    private _unidadmedidadService:UnidadmedidadService,
-    private _productosSatService:ProductosSatService
+              private empresaFacturacionServicioService:EmpresaFacturacionServicioService,
+              private productosFacturacionServicioService:ProductosFacturacionServicioService,
+              private _tablasSatService:TablasSatService,
+              private _unidadmedidadService:UnidadmedidadService,
+              private _productosSatService:ProductosSatService
     ) {
 
-    
-    
     this.traerArticulos();  
     this.traerUnidadesMedidaSAT();
     this.traerProductoSAT();
     this.traerProductosSATEmpresa();
     this.traerUnidadesMedidaSATEmpresa();
-   
    }
 
    ReiniciarNumPalabras = () => {
      this.numPalabras = 1;
    }
 
+   //Filtro de lista de productos
    FiltroArticulos = (filtro) => {
-    this.paginaActualArticulo= 1;
+     console.log('Filtro de producto por nombre');
+    this.paginaActualArticulo = 1;
     this.paginadoArticulos(3);
       if(filtro == '' ){
         this.paginaActualArticulo = 1;
@@ -136,14 +146,33 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
             if(palabras[x] != "") {
               let U_Encontradas = this.producto.filter((producto) => {
                 let contador = 0;
-                for(let y = 0; y <= producto.pro_nombre.length-1; y++){
-                   if(palabras[x][y] != producto.pro_nombre[y]) {
-                    break;
-                   }else {
-                     contador++;
 
-                   }
+                for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< producto.pro_nombre.length;j++) {
+                    if(palabras[x][y] == producto.pro_nombre[j]) {
+                      contador++;
+                      y++;
+                      if(contador == palabras[x].length) {
+                        break;
+                      }
+                    }else {
+                      if(contador > 0) {
+                        contador--;
+                        y--;  
+                      }else {
+                        continue;
+                      }
+                    }
+                  }
                 }
+                // for(let y = 0; y <= producto.pro_nombre.length-1; y++){
+                //    if(palabras[x][y] != producto.pro_nombre[y]) {
+                //     break;
+                //    }else {
+                //      contador++;
+
+                //    }
+                // }
                 if(contador == palabras[x].length) {
                   return producto;
                 }
@@ -174,6 +203,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
       }
    }
 
+   //Paginado de lista de productos
    paginadoArticulos = async (tipo,productos?) => {
     if(tipo == 1) {
       this.numPaginasArticulos = [];
@@ -205,12 +235,16 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     
   }
 
+  //Cambio de pagina de lista de productos
   cambiarPaginaArticulos =async(pag) => {
     this.paginaActualArticulo = pag;
     this.paginadoArticulos(3);
   }
 
+
+    //Filtro para SAT interno
    FiltroPSATEmpresa = (filtro) => {
+   console.log('FILTRO Producto filtrado del SAT');
     this.paginaActualProductoEmpresa = 1;
     this.paginadoPSATEmpresa(3);
       if(filtro == '' ){
@@ -227,6 +261,46 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
             if(palabras[x] != "") {
               let U_Encontradas = this.productosSATempresa.filter((producto) => {
                 let contador = 0;
+                
+                // for(let y = 0; y<palabras[x].length;y++) {
+                //   for(let j = 0; j< producto.pro_nombre.length;j++) {
+                //     if(palabras[x][y] == producto.pro_nombre[j]) {
+                //       contador++;
+                //       y++;
+                //       if(contador == palabras[x].length) {
+                //         break;
+                //       }
+                //     }else {
+                //       if(contador > 0) {
+                //         contador--;
+                //         y--;  
+                //       }else {
+                //         continue;
+                //       }
+                //     }
+                //   }
+                // }
+
+                /*
+                 for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< producto.pro_nombre.length;j++) {
+                    if(palabras[x][y] == producto.pro_nombre[j]) {
+                      contador++;
+                      y++;
+                      if(contador == palabras[x].length) {
+                        break;
+                      }
+                    }else {
+                      if(contador > 0) {
+                        contador--;
+                        y--;  
+                      }else {
+                        continue;
+                      }
+                    }
+                  }
+                } */
+
                 for(let y = 0; y <= producto.nombre.length-1; y++){
                    if(palabras[x][y] != producto.nombre[y]) {
                     break;
@@ -301,6 +375,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
   }
 
    FiltroPSAT = (filtro) => {
+     console.log('Aqui esss');
     this.paginaActualProducto = 1;
     this.paginadoPSAT(3);
       if(filtro == '' ){
@@ -394,6 +469,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
 
 
    FiltroUMSEmpresa = (filtro) => {
+     console.log('FILTRO UDM');
     this.paginaActualEmpresa = 1;
     this.paginadoUMSEmpresa(3);
       if(filtro == '' ){
@@ -592,15 +668,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
 
    }
 
-
-   agregar = async () => {
-    try {
-      await this.productosFacturacionServicioService.agregarArticulo(this.articulo)
-      this.traerArticulos();
-    } catch (error) {
-      console.log('Error agregar productos',error);
-    }
-   }
+  
 
    traerMedida(id) {
     this.catUnidadMedidaSAT.nombre = this._unidadMedida[id].nombre;
@@ -647,7 +715,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     }
    }
 
-   //Insertar producto SAT
+   //Agregar producto SAT
    insertarProductoSATEmpresa=async() => {
      try {
        await this._productosSatService.insertarProductoSATEmpresa(this.catProductoSAT)
@@ -658,6 +726,28 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
        console.log('Error no se agrego producto SAT',error);
        this.toastr.errorToastr('Error','No se agrego producto SAT');
      }
+   }
+
+   //Agregar prodcuto de la empresa
+  agregarProducto = async() => { 
+    try {
+      await this.productosFacturacionServicioService.agregarArticulo(this.producto2)
+      this.traerArticulos();
+      this.toastr.successToastr('Exito','Se ha guardado un producto nuevo dentro de tu empresa');
+    } catch (error) {
+      console.log('Error agregar producto',error);
+      this.toastr.errorToastr('Error','No se logro ingresar un producto nuevo');
+    }
+  }
+
+   //Agregar producto (?)
+   agregar = async () => {
+    try {
+      await this.productosFacturacionServicioService.agregarArticulo(this.articulo)
+      this.traerArticulos();
+    } catch (error) {
+      console.log('Error agregar productos',error);
+    }
    }
 
    // GET unidades filtradas
@@ -708,7 +798,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     }
   }
 
-//Get Articulos productos
+  //Get Articulos productos
   traerArticulos = async () => {
     try {
       let producto = await this.productosFacturacionServicioService.traerArticulos();
@@ -719,48 +809,36 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     }
    }
 
-
-
-  ngOnInit() {
+  //funcion de limpiar todo en agregar producto
+  limpiar() {
+        this.producto2.pro_clave = null;
+        this.producto2.pro_clave_sat = null;
+        this.producto2.pro_nombre = null;
+        this.producto2.pro_costo = null;
+        this.producto2.pro_precio = null;
+        this.producto2.pro_descuento = null;
+        this.producto2.pro_IVA = null;
+        this.producto2.pro_ISR = null;
+        this.producto2.pro_ISH = null;
+        this.producto2.pro_IEPS = null;
+        this.producto2.pro_unidad_medida = null;
   }
 
-limpiar() {
-      this.producto2.pro_clave = null;
-      this.producto2.pro_clave_sat = null;
-      this.producto2.pro_nombre = null;
-      this.producto2.pro_costo = null;
-      this.producto2.pro_precio = null;
-      this.producto2.pro_descuento = null;
-      this.producto2.pro_IVA = null;
-      this.producto2.pro_ISR = null;
-      this.producto2.pro_ISH = null;
-      this.producto2.pro_IEPS = null;
-      this.producto2.pro_unidad_medida = null;
-}
-
-agregarProducto = async() => {
- console.log('Entro a la funcion agregar productos')
-  try {
-    await this.productosFacturacionServicioService.agregarArticulo(this.producto2)
-    this.traerArticulos();
-    this.toastr.successToastr('Exito','Se ha guardado un producto nuevo dentro de tu empresa');
-  } catch (error) {
-    console.log('Error agregar producto',error);
-    this.toastr.errorToastr('Error','No se logro ingresar un producto nuevo');
-  }
-}
-
-// limpiar Unidades SAT
-limpiarUnidades() {
+  // limpiar Unidades SAT
+  limpiarUnidades() {
   this.catUnidadMedidaSAT.codigo = null;
   this.catUnidadMedidaSAT.nombre = null;
  }
 
- // limpiar Productos SAT
- limpiarProductos() {
-  this.catProductoSAT.codigo = null;
-  this.catProductoSAT.nombre = null;
- }
+  // limpiar Productos SAT
+  limpiarProductos() {
+    this.catProductoSAT.codigo = null;
+    this.catProductoSAT.nombre = null;
+  }
+
+ ngOnInit() {
+   console.log('Se entro a productos');
+}
 
 }
 
@@ -781,7 +859,6 @@ class Producto {
   }
 }
 
-
 class Producto2 {
   constructor(
     public pro_clave: string,
@@ -801,7 +878,6 @@ class Producto2 {
   ){
   }
 }
-
 
 class unidadMedida {
   constructor(

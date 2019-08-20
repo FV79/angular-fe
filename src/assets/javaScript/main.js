@@ -79,9 +79,6 @@ function fileValidation() {
 }
 
 
-
-
-
 //Funcion Modal automatico
 $(document).ready(function() {
     $('#modalAutomatic').modal('toggle')

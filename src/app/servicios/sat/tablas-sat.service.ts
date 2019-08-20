@@ -14,7 +14,7 @@ export class TablasSatService {
 
    public getListaUnidadMedida() {
     return new Promise((resolve,reject) => {
-      this.httpClient.get('http://200.92.88.27:3000/unidadmedida',{
+      this.httpClient.get('http://localhost:3000/unidadmedida',{
          responseType:'json',
          headers:{
            'token':window.localStorage.getItem('token')

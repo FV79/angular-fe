@@ -72,7 +72,7 @@
                         <div>
                             <label for="inputState" class="labelCliente ">USO CFDI</label>
                             <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_cliente_usoCDFI_codigo" name="fac_cliente_usoCDFI_codigo">
-                                <option value="">Seleccione uso CFDI</option>
+                                <option>Seleccione uso CFDI</option>
                                 <option *ngFor="let usocfdi of usoCFDI" value="{{usocfdi.cfdi_codigo}}"> {{usocfdi.cfdi_nombre}} </option>
                             </select>
                         </div>
@@ -207,7 +207,7 @@
                         <!-- [disabled]="facturaDDL.fac_pago_formapago_codigo == '99'" -->
                         <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                             <label for="" class="labelCliente">Metodo de pago</label>
-                            <select *ngIf="this.facturaDDL.fac_pago_formapago_codigo == '99'" id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_metodopago" name="fac_pago_metodopago">
+                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_metodopago" name="fac_pago_metodopago">
                                 <option value="">Seleccione Metodo</option>
                                 <option *ngFor="let metodopago of MetodoPago" value="{{metodopago.metodoPagoCodigo}}"> {{metodopago.metodoPagoNombre}} </option>
                             </select>
@@ -225,7 +225,7 @@
                         </div>
 
                         <div class="col-md-6">
-                            <label for="" class="labelCliente">Valor dolar</label>
+                            <label class="labelCliente">Valor dolar</label>
                             <input (ngModelChange)="this.calcularPagos(1,$event)" [disabled]="facturaDDL.fac_pago_tipomoneda == 0 ?true :false" [(ngModel)]="facturaDDL.fac_pago_valordolar" name="fac_pago_valordolar" type="number" class="inputCliente" placeholder="Valor del dollar">
                         </div>
                     </div>
@@ -237,7 +237,6 @@
                     <h3 class="tituloFacturacion">Observaciones factura</h3>
                     <div>
                         <label for="" class="labelCliente">Observaciones</label>
-                        <!-- <input [(ngModel)]="factura.observaciones" name="observaciones" class="w-100" type="text" placeholder="Obsercaciones de la factura"> -->
                         <textarea [(ngModel)]="facturaDDL.observaciones" name="observaciones" cols="5" rows="10" placeholder="Obsercaciones de la factura" style="width: 100%; height: auto;"></textarea>
                     </div>
                 </div>
@@ -297,19 +296,22 @@
             </div>
 
             <!-- Seccion nota de credito -->
-            <!-- *ngIf="facturaDDL.fac_factura_tipodoc == 1 $('#notaCredito').hidden" -->
             <div class="row facturacionBorder faPaTOBO20" id="notaCredito" *ngIf="facturaDDL.fac_factura_tipodoc == 1">
                 <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                     <h3 class="tituloFacturacion">Datos Nota de credito</h3>
+
                     <div class="row">
-                        <div class="col-md-6">
+
+                        <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6">
                             <label for="" class="labelCliente">Folio relacionado</label>
-                            <input type="number" [(ngModel)]="facturaDDL.fac_nocre_foliorel" name="fac_nocre_foliorel" class="inputCliente" placeholder="Cantidad de producto">
+                            <input type="number" [(ngModel)]="facturaDDL.fac_nocre_foliorel" name="fac_nocre_foliorel" class="inputCliente" placeholder="Folio Fiscal">
+
                         </div>
-                        <div class="col-md-6">
+
+                        <div class="col-md-6 col-xl-6 col-lg-6 col-sm-6">
                             <label for="" class="labelCliente">Tipo relacion</label>
                             <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_nocre_tiporelacion_codigo" name="fac_nocre_tiporelacion_codigo">
-                                <option value="">Seleccione un documento</option>
+                                <option value="">Seleccione el tipo de relacion</option>
                                 <option *ngFor="let tiporelacion of tipoRelacion" value="{{tiporelacion.trelacion_codigo}}"> {{tiporelacion.trelacion_nombre}} </option>
                             </select>
                         </div>
@@ -334,6 +336,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+                    <input (ngModelChange)="FiltroArticulos($event)" [(ngModel)]="filtroProductoEmpresa" class="form-control" type="text" placeholder="Buscar...">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -352,6 +355,11 @@
 
                             </tbody>
                         </table>
+                        <div class="scroll-horizontal">
+                            <div *ngFor="let pagina of numPaginasProductoEmpresa" class="displayIB">
+                                <button (click)="cambiarPaginaArticulos(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -375,7 +383,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                    <input (ngModelChange)="FiltroPSATEmpresa($event)" [(ngModel)]="filtroProductoEmpresa" class="form-control" type="text" placeholder="Buscar...">
+                    <input (ngModelChange)="FiltroArticulos($event)" [(ngModel)]="filtroProductoEmpresa" class="form-control" type="text" placeholder="Buscar...">
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <thead>
@@ -395,6 +403,11 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="scroll-horizontal">
+                            <div *ngFor="let pagina of numPaginasProductoEmpresa" class="displayIB">
+                                <button (click)="cambiarPaginaArticulos(pagina + 1)" style="float:left;margin-left: 5px" class="btn btn-primary">{{pagina + 1}}</button>
+                            </div>
+                        </div>
                     </div>
 
                 </div>

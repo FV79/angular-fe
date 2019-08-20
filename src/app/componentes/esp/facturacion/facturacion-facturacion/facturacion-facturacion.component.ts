@@ -87,7 +87,12 @@ export class FacturacionFacturacionComponent implements OnInit {
   PS_encontrados = [];
   PS_encontradosEmpresa = [];
   numPalabras=1;
-  productoMostar = new Producto('',0,0,0,0,0,0,'','','','',null,'');
+  productoMostrar = new Producto('',0,0,0,0,0,0,'','','','',null,'');
+  //
+  prouctosEncontrados = [];
+  filtroArticulo:string = '';
+  paginaActualArticulo = 1;
+  numPaginasArticulos:any = [];
 
 
   constructor(private facturacionFacturacionServicioService:FacturacionFacturacionServicioService,
@@ -109,7 +114,9 @@ export class FacturacionFacturacionComponent implements OnInit {
   ngOnInit() {
     if (this.facturaDDL.fac_factura_tipodoc == 0) {
             $("#notaCredito").hide();      
-          }                           
+          }                    
+          
+      console.log('metodo de pago', this.facturaDDL.fac_pago_metodopago[3]);
   }
 
 pruebass() {
@@ -531,113 +538,113 @@ pruebass() {
     this.facturaDDL.fac_cliente_usoCDFI_codigo = null;
   }
   
-//
 
-  //Filtro para productos
-    //Filtro para SAT interno
-    FiltroPSATEmpresa = (filtro) => {
-      console.log('FILTRO Producto filtrado del SAT');
-       this.paginaActualProductoEmpresa = 1;
-       this.paginadoPSATEmpresa(3);
-         if(filtro == '' ){
-           this.paginaActualProductoEmpresa = 1;
-           this.paginadoPSATEmpresa(1);
-         }else{
-           this.PS_encontradosEmpresa = []; 
-           let palabras = filtro.split(",");
-           if(palabras.length - this.numPalabras == 1) {
-             this.paginaActualProductoEmpresa = 1;
-             this.paginadoPSATEmpresa(1);
-           }else {
-             for(let x = 0;x <= palabras.length-1;x++) {
-               if(palabras[x] != "") {
-                 let U_Encontradas = this.producto.filter((producto) => {
-                   let contador = 0;
-                   
-                   for(let y = 0; y<palabras[x].length;y++) {
-                     for(let j = 0; j< producto.nombre.length;j++) {
-                       if(palabras[x][y] == producto.nombre[j]) {
-                         contador++;
-                         y++;
-                         if(contador == palabras[x].length) {
-                           break;
-                         }
-                       }else {
-                         if(contador > 0) {
-                           contador--;
-                           y--;  
-                         }else {
-                           continue;
-                         }
-                       }
+  //Filtro para productos    
+   FiltroArticulos = (filtro) => {
+    console.log('Filtro de producto por nombre');
+   this.paginaActualArticulo = 1;
+   this.paginadoArticulos(3);
+     if(filtro == '' ){
+       this.paginaActualArticulo = 1;
+       this.paginadoArticulos(1);
+     }else{
+       this.prouctosEncontrados = []; 
+       let palabras = filtro.split(",");
+       if(palabras.length - this.numPalabras == 1) {
+         this.paginaActualArticulo = 1;
+         this.paginadoArticulos(1);
+       }else {
+         for(let x = 0;x <= palabras.length-1;x++) {
+           if(palabras[x] != "") {
+             let U_Encontradas = this.producto.filter((producto) => {
+               let contador = 0;
+
+               for(let y = 0; y<palabras[x].length;y++) {
+                 for(let j = 0; j< producto.pro.nombre.length;j++) {
+                   if(palabras[x][y] == producto.pro.nombre[j]) {
+                     contador++;
+                     y++;
+                     if(contador == palabras[x].length) {
+                       break;
+                     }
+                   }else {
+                     if(contador > 0) {
+                       contador--;
+                       y--;  
+                     }else {
+                       continue;
                      }
                    }
-                   
-                   if(contador == palabras[x].length) {
-                     return producto;
-                   }
-                   
-                   if(palabras[x] == producto.id_producto_sat || palabras[x] == producto.codigo) {
-                     return producto;
-                   }
-                   contador = 0;
-                   // return medida.id_unidad == palabras[x] || medida.codigo == palabras[x] || medida.nombre == palabras[x]
-                 });
-                 for (const unidad of U_Encontradas) {
-                   if(this.PS_encontradosEmpresa.indexOf(unidad) == -1){
-                     this.PS_encontradosEmpresa.push(unidad)
-                   }
-                 }
-                 this.paginadoPSATEmpresa(2,this.PS_encontradosEmpresa); 
-               }else{
-                 if(palabras.length == this.numPalabras || palabras.length - this.numPalabras != 1) {
-                   this.paginaActualProductoEmpresa = 1;
-                   this.paginadoPSATEmpresa(1);
-                   break;
                  }
                }
-             } 
-                       
+               
+               if(contador == palabras[x].length) {
+                 return producto;
+               }
+               
+               if(palabras[x] == producto.codArticulo) {
+                 return producto;
+               }
+               contador = 0;
+
+             });
+             for (const unidad of U_Encontradas) {
+               if(this.prouctosEncontrados.indexOf(unidad) == -1){
+                 this.prouctosEncontrados.push(unidad)
+               }
+             }
+             this.paginadoArticulos(2,this.prouctosEncontrados); 
+           }else{
+             if(palabras.length == this.numPalabras || palabras.length - this.numPalabras != 1) {
+               this.paginaActualArticulo = 1;
+               this.paginadoArticulos(1);
+               break;
+             }
            }
-           this.numPalabras = palabras.length;  
-         }
-      }
-   
-      paginadoPSATEmpresa = async (tipo,productos?) => {
-       if(tipo == 1) {
-         this.numPaginasProductoEmpresa = [];
-         let np = Math.floor(this.producto["length"]/50);
-         for(let x = 0; x <=np; x++) {
-           this.numPaginasProductoEmpresa.push(x);
-         }
-         let inicio = (this.paginaActualProductoEmpresa-1)*50;
-         let final = inicio + 50;
-     
-         this.productoMostar = this.producto.slice(inicio,final);
-       }else if(tipo == 2){
-         this.numPaginasProductoEmpresa = [];
-         let np = Math.floor(productos["length"]/50);
-         for(let x = 0; x <=np; x++) {
-           this.numPaginasProductoEmpresa.push(x);
-         }
-         let inicio = (this.paginaActualProductoEmpresa-1)*50;
-         let final = inicio + 50;
-     
-         this.productoMostar = productos.slice(inicio,final);
-       }else {
-         if(this.filtroProductoEmpresa == ''){
-           this.paginadoPSATEmpresa(1)
-         }else {
-           this.paginadoPSATEmpresa(2,this.PS_encontradosEmpresa)
-         }
+         } 
+                   
        }
-       
+       this.numPalabras = palabras.length;  
      }
+  }
+
+  //Paginado de lista de productos
+  paginadoArticulos = async (tipo,productos?) => {
+   if(tipo == 1) {
+     this.numPaginasArticulos = [];
+     let np = Math.floor(this.producto["length"]/50);
+     for(let x = 0; x <=np; x++) {
+       this.numPaginasArticulos.push(x);
+     }
+     let inicio = (this.paginaActualArticulo-1)*50;
+     let final = inicio + 50;
+ 
+     this.productoMostrar = this.producto.slice(inicio,final);
+   }else if(tipo == 2){
+     this.numPaginasArticulos = [];
+     let np = Math.floor(productos["length"]/50);
+     for(let x = 0; x <=np; x++) {
+       this.numPaginasArticulos.push(x);
+     }
+     let inicio = (this.paginaActualArticulo-1)*50;
+     let final = inicio + 50;
+ 
+     this.productoMostrar = productos.slice(inicio,final);
+   }else {
+     if(this.filtroArticulo == ''){
+       this.paginadoArticulos(1)
+     }else {
+       this.paginadoArticulos(2,this.prouctosEncontrados)
+     }
+   }
    
-     cambiarPaginaPSATEmpresa =async(pag) => {
-       this.paginaActualProductoEmpresa = pag;
-       this.paginadoPSATEmpresa(3);
-     }
+ }
+
+ //Cambio de pagina de lista de productos
+ cambiarPaginaArticulos =async(pag) => {
+   this.paginaActualArticulo = pag;
+   this.paginadoArticulos(3);
+ }
 
 
 

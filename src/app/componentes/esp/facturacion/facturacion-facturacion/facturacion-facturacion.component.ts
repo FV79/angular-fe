@@ -531,6 +531,8 @@ pruebass() {
     this.facturaDDL.fac_cliente_usoCDFI_codigo = null;
   }
   
+//
+
   //Filtro para productos
     //Filtro para SAT interno
     FiltroPSATEmpresa = (filtro) => {

@@ -262,29 +262,9 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
               let U_Encontradas = this.productosSATempresa.filter((producto) => {
                 let contador = 0;
                 
-                // for(let y = 0; y<palabras[x].length;y++) {
-                //   for(let j = 0; j< producto.pro_nombre.length;j++) {
-                //     if(palabras[x][y] == producto.pro_nombre[j]) {
-                //       contador++;
-                //       y++;
-                //       if(contador == palabras[x].length) {
-                //         break;
-                //       }
-                //     }else {
-                //       if(contador > 0) {
-                //         contador--;
-                //         y--;  
-                //       }else {
-                //         continue;
-                //       }
-                //     }
-                //   }
-                // }
-
-                /*
-                 for(let y = 0; y<palabras[x].length;y++) {
-                  for(let j = 0; j< producto.pro_nombre.length;j++) {
-                    if(palabras[x][y] == producto.pro_nombre[j]) {
+                for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< producto.nombre.length;j++) {
+                    if(palabras[x][y] == producto.nombre[j]) {
                       contador++;
                       y++;
                       if(contador == palabras[x].length) {
@@ -299,15 +279,8 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
                       }
                     }
                   }
-                } */
-
-                for(let y = 0; y <= producto.nombre.length-1; y++){
-                   if(palabras[x][y] != producto.nombre[y]) {
-                    break;
-                   }else {
-                     contador++; 
-                   }
                 }
+                
                 if(contador == palabras[x].length) {
                   return producto;
                 }
@@ -374,8 +347,9 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     this.paginadoPSATEmpresa(3);
   }
 
+  //Filtro para UDM
    FiltroPSAT = (filtro) => {
-     console.log('Aqui esss');
+     console.log('Filtro para UDM');
     this.paginaActualProducto = 1;
     this.paginadoPSAT(3);
       if(filtro == '' ){
@@ -392,13 +366,26 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
             if(palabras[x] != "") {
               let U_Encontradas = this._claveProductoSat.filter((producto) => {
                 let contador = 0;
-                for(let y = 0; y <= producto.nombre.length-1; y++){
-                   if(palabras[x][y] != producto.nombre[y]) {
-                    break;
-                   }else {
-                     contador++; 
-                   }
+
+                for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< producto.nombre.length;j++) {
+                    if(palabras[x][y] == producto.nombre[j]) {
+                      contador++;
+                      y++;
+                      if(contador == palabras[x].length) {
+                        break;
+                      }
+                    }else {
+                      if(contador > 0) {
+                        contador--;
+                        y--;  
+                      }else {
+                        continue;
+                      }
+                    }
+                  }
                 }
+                
                 if(contador == palabras[x].length) {
                   return producto;
                 }
@@ -468,6 +455,7 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
   }
 
 
+  //Filtro para agregar producto UDM
    FiltroUMSEmpresa = (filtro) => {
      console.log('FILTRO UDM');
     this.paginaActualEmpresa = 1;
@@ -486,13 +474,34 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
             if(palabras[x] != "") {
               let U_Encontradas = this._unidadMedidaEmpresa.filter((medida) => {
                 let contador = 0;
-                for(let y = 0; y <= medida.nombre.length-1; y++){
-                   if(palabras[x][y] != medida.nombre[y]) {
-                    break;
-                   }else {
-                     contador++; 
-                   }
+
+                for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< medida.nombre.length;j++) {
+                    if(palabras[x][y] == medida.nombre[j]) {
+                      contador++;
+                      y++;
+                      if(contador == palabras[x].length) {
+                        break;
+                      }
+                    }else {
+                      if(contador > 0) {
+                        contador--;
+                        y--;  
+                      }else {
+                        continue;
+                      }
+                    }
+                  }
                 }
+
+                // for(let y = 0; y <= medida.nombre.length-1; y++){
+                //    if(palabras[x][y] != medida.nombre[y]) {
+                //     break;
+                //    }else {
+                //      contador++; 
+                //    }
+                // }
+
                 if(contador == palabras[x].length) {
                   return medida;
                 }
@@ -559,7 +568,9 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
     this.paginadoUMSEmpresa(3);
   }
 
+  //Filtro para las UDM Del catalogo del SAT
    FiltroUMS = (filtro) => {
+     console.log('Medidas Catalogo SAT');
     this.paginaActual = 1;
     this.paginadoUMS(3);
       if(filtro == '' ){
@@ -576,13 +587,33 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
             if(palabras[x] != "") {
               let U_Encontradas = this._unidadMedida.filter((medida) => {
                 let contador = 0;
-                for(let y = 0; y <= medida.nombre.length-1; y++){
-                   if(palabras[x][y] != medida.nombre[y]) {
-                    break;
-                   }else {
-                     contador++; 
-                   }
+
+                for(let y = 0; y<palabras[x].length;y++) {
+                  for(let j = 0; j< medida.nombre.length;j++) {
+                    if(palabras[x][y] == medida.nombre[j]) {
+                      contador++;
+                      y++;
+                      if(contador == palabras[x].length) {
+                        break;
+                      }
+                    }else {
+                      if(contador > 0) {
+                        contador--;
+                        y--;  
+                      }else {
+                        continue;
+                      }
+                    }
+                  }
                 }
+
+                // for(let y = 0; y <= medida.nombre.length-1; y++){
+                //    if(palabras[x][y] != medida.nombre[y]) {
+                //     break;
+                //    }else {
+                //      contador++; 
+                //    }
+                // }
                 if(contador == palabras[x].length) {
                   return medida;
                 }
@@ -668,9 +699,8 @@ catUnidadMedidaSAT = new catUnidadMedidaSAT('','','');
 
    }
 
-  
-
-   traerMedida(id) {
+  //Traer medidas de unidad SAT
+   traerMedida(id) {     
     this.catUnidadMedidaSAT.nombre = this._unidadMedida[id].nombre;
     this.catUnidadMedidaSAT.codigo = this._unidadMedida[id].codigo;
     this.catUnidadMedidaSAT.id_unidad_sat = this._unidadMedida[id].id_unidad;

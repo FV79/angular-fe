@@ -56,12 +56,11 @@ export class FacturacionFacturacionComponent implements OnInit {
     metodoPagoNombre: "PAGO EN PARCIALIDADES O DIFERIDO"
   }]
 
-  precio_sin_iva: number;
+  
   arreglo = new Array();
 
-//  factura = new Factura('','','','','','','','','','','','','','','','','','',0,0,0);
   cliente = new Cliente('','','','','','','','','','','','','','','',0);
-  producto = new Producto('',0,0,0,0,0,0,'','','','',null,'');
+  producto:any = new Producto('',0,0,0,0,0,0,'','','','',null,'');
   productoAgregado = new Array();
   productoImpuestoAgregado = new Array();
   productoImpuestos = new Producto('',0,0,0,0,0,0,'','','','',null,'');
@@ -80,6 +79,16 @@ export class FacturacionFacturacionComponent implements OnInit {
   correoFactura:any ={correo:'',cc:''};
   correosFactura = new Array();
   loading: boolean;
+
+  //Filtro productos
+  paginaActualProductoEmpresa:any = 1;
+  numPaginasProductoEmpresa:any  = [];
+  filtroProductoEmpresa:string = '';
+  PS_encontrados = [];
+  PS_encontradosEmpresa = [];
+  numPalabras=1;
+  productoMostar = new Producto('',0,0,0,0,0,0,'','','','',null,'');
+
 
   constructor(private facturacionFacturacionServicioService:FacturacionFacturacionServicioService,
     private serviceConsultaCliente:ServiceConsultaCliente,
@@ -522,23 +531,111 @@ pruebass() {
     this.facturaDDL.fac_cliente_usoCDFI_codigo = null;
   }
   
-  //productosFacturacionServicioService
-  /*seleccionarProductoClave () {
-    this.productosFacturacionServicioService.seleccionararticuloClave(this.producto.pro_clave)    
-    .then((producto:any) => {
-      console.log(producto.result[0]);
-      this.facturaDDL.fac_pro_nombre = producto.result[0].pro_nombre;
-      this.facturaDDL.fac_pro_unidadmedida_nombre_sat = producto.result[0].pro_unidad_medida;        
-      this.facturaDDL.fac_pro_precio = producto.result[0].pro_precio; 
-      this.facturaDDL.fac_pro_descuento = producto.result[0].pro_descuento; 
-      // facturaDDL.fac_pro_idprodcto_interna
-      this.toast.successToastr('Exito','Se encontro');
-    })
-    .catch((err) => {
-      console.log('Error al traer pro_clavee',err);
-      this.toast.errorToastr('Error','No existe');
-    })
-  }*/
+  //Filtro para productos
+    //Filtro para SAT interno
+    FiltroPSATEmpresa = (filtro) => {
+      console.log('FILTRO Producto filtrado del SAT');
+       this.paginaActualProductoEmpresa = 1;
+       this.paginadoPSATEmpresa(3);
+         if(filtro == '' ){
+           this.paginaActualProductoEmpresa = 1;
+           this.paginadoPSATEmpresa(1);
+         }else{
+           this.PS_encontradosEmpresa = []; 
+           let palabras = filtro.split(",");
+           if(palabras.length - this.numPalabras == 1) {
+             this.paginaActualProductoEmpresa = 1;
+             this.paginadoPSATEmpresa(1);
+           }else {
+             for(let x = 0;x <= palabras.length-1;x++) {
+               if(palabras[x] != "") {
+                 let U_Encontradas = this.producto.filter((producto) => {
+                   let contador = 0;
+                   
+                   for(let y = 0; y<palabras[x].length;y++) {
+                     for(let j = 0; j< producto.nombre.length;j++) {
+                       if(palabras[x][y] == producto.nombre[j]) {
+                         contador++;
+                         y++;
+                         if(contador == palabras[x].length) {
+                           break;
+                         }
+                       }else {
+                         if(contador > 0) {
+                           contador--;
+                           y--;  
+                         }else {
+                           continue;
+                         }
+                       }
+                     }
+                   }
+                   
+                   if(contador == palabras[x].length) {
+                     return producto;
+                   }
+                   
+                   if(palabras[x] == producto.id_producto_sat || palabras[x] == producto.codigo) {
+                     return producto;
+                   }
+                   contador = 0;
+                   // return medida.id_unidad == palabras[x] || medida.codigo == palabras[x] || medida.nombre == palabras[x]
+                 });
+                 for (const unidad of U_Encontradas) {
+                   if(this.PS_encontradosEmpresa.indexOf(unidad) == -1){
+                     this.PS_encontradosEmpresa.push(unidad)
+                   }
+                 }
+                 this.paginadoPSATEmpresa(2,this.PS_encontradosEmpresa); 
+               }else{
+                 if(palabras.length == this.numPalabras || palabras.length - this.numPalabras != 1) {
+                   this.paginaActualProductoEmpresa = 1;
+                   this.paginadoPSATEmpresa(1);
+                   break;
+                 }
+               }
+             } 
+                       
+           }
+           this.numPalabras = palabras.length;  
+         }
+      }
+   
+      paginadoPSATEmpresa = async (tipo,productos?) => {
+       if(tipo == 1) {
+         this.numPaginasProductoEmpresa = [];
+         let np = Math.floor(this.producto["length"]/50);
+         for(let x = 0; x <=np; x++) {
+           this.numPaginasProductoEmpresa.push(x);
+         }
+         let inicio = (this.paginaActualProductoEmpresa-1)*50;
+         let final = inicio + 50;
+     
+         this.productoMostar = this.producto.slice(inicio,final);
+       }else if(tipo == 2){
+         this.numPaginasProductoEmpresa = [];
+         let np = Math.floor(productos["length"]/50);
+         for(let x = 0; x <=np; x++) {
+           this.numPaginasProductoEmpresa.push(x);
+         }
+         let inicio = (this.paginaActualProductoEmpresa-1)*50;
+         let final = inicio + 50;
+     
+         this.productoMostar = productos.slice(inicio,final);
+       }else {
+         if(this.filtroProductoEmpresa == ''){
+           this.paginadoPSATEmpresa(1)
+         }else {
+           this.paginadoPSATEmpresa(2,this.PS_encontradosEmpresa)
+         }
+       }
+       
+     }
+   
+     cambiarPaginaPSATEmpresa =async(pag) => {
+       this.paginaActualProductoEmpresa = pag;
+       this.paginadoPSATEmpresa(3);
+     }
 
 
 

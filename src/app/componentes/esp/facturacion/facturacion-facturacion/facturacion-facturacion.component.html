@@ -206,7 +206,7 @@
                         <div class="col-md-12 col-xl-12 col-lg-12 col-sm-12">
                             <label for="" class="labelCliente">Metodo de pago</label>
                             <!-- <input [(ngModel)]="factura.metodo_pago" name="metodo_pago" type="number" class="inputCliente" placeholder="Ingrese el RFC"> -->
-                            <select id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_metodopago" name="fac_pago_metodopago">
+                            <select [disabled]="facturaDDL.fac_pago_formapago_codigo == '99'" id="inputState" class="form-control" class="inputCliente" [(ngModel)]="facturaDDL.fac_pago_metodopago" name="fac_pago_metodopago">
                                 <option value="">Seleccione Metodo</option>
                                 <option *ngFor="let metodopago of MetodoPago" value="{{metodopago.metodoPagoCodigo}}"> {{metodopago.metodoPagoNombre}} </option>
                             </select>
